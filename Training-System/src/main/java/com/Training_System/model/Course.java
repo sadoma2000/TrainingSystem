@@ -1,4 +1,4 @@
-package com.Training_System.models;
+package com.Training_System.model;
 
 import java.sql.Timestamp;
 
@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 public class Course {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String Topic;
 	private Timestamp Start_date;
 	private Timestamp End_date;

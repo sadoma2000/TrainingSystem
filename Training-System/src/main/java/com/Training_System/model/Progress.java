@@ -1,7 +1,5 @@
-package com.Training_System.models;
+package com.Training_System.model;
 
-
-import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,14 +13,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Certificate {
+public class Progress {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-    private Long Student_id;
-    private Long Course_id;
-    private Timestamp Issued_date;
-    private String Certificate_title;
+
+	private Integer Completion_Percentage;
+	private Long Student_id;
+	private Long Course_id;
+	private Long Lesson_id;
 }

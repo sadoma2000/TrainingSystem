@@ -1,4 +1,4 @@
-package com.Training_System.models;
+package com.Training_System.model;
 
 
 import jakarta.persistence.Entity;
@@ -13,14 +13,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lesson {
+public class Student {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Long Course_id;
-	private String Title;
-	private Integer Lesson_number;
-	private String Content_summary;
+
+	private String First_name;
+	private String Last_name;
+	private String Email;
+	private String Major;
+	private String Gender;
 }
