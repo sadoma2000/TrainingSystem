@@ -49,10 +49,10 @@ public class CertificateService implements ICertificateService {
 		}
 
 		Certificate existingCertificate = existingCertificateOptional.get();
-		existingCertificate.setStudent_id(certificate.getStudent_id());
-		existingCertificate.setCourse_id(certificate.getCourse_id());
-		existingCertificate.setIssued_date(certificate.getIssued_date());
-		existingCertificate.setCertificate_title(certificate.getCertificate_title());
+		existingCertificate.setStudentId(certificate.getStudentId());
+		existingCertificate.setCourseId(certificate.getCourseId());
+		existingCertificate.setIssuedDate(certificate.getIssuedDate());
+		existingCertificate.setCertificateTitle(certificate.getCertificateTitle());
 
 		certificateRepository.save(existingCertificate);
 		return "Certificate updated successfully";

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.Training_System.model.Progress;
 
 @Repository
-public interface ProgressRepository extends JpaRepository<Progress, Long>{
+public interface ProgressRepository extends JpaRepository<Progress, Long> {
 
 	List<Progress> findByStudentId(Long studentId);
+
 }

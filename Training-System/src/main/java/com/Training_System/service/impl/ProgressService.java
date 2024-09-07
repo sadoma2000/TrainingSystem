@@ -16,7 +16,7 @@ import com.Training_System.service.interfaces.IProgressService;
 public class ProgressService implements IProgressService {
 
 	@Autowired
-	ProgressRepository progressRepository;
+	private ProgressRepository progressRepository;
 
 	@Override
 	public Progress getProgressById(Long id) {
@@ -37,10 +37,12 @@ public class ProgressService implements IProgressService {
 	@Override
 	public String addProgress(Progress progress) {
 		Progress newProgress = new Progress();
-		newProgress.setStudent_id(progress.getStudent_id());
-		newProgress.setCourse_id(progress.getCourse_id());
-		newProgress.setCompleted_tasks(progress.getCompleted_tasks());
-		newProgress.setRequired_tasks(progress.getRequired_tasks());
+		newProgress.setStudentId(progress.getStudentId());
+		newProgress.setCourseId(progress.getCourseId());
+		newProgress.setCompletedTasks(progress.getCompletedTasks());
+		newProgress.setRequiredTasks(progress.getRequiredTasks());
+		newProgress.setCompletionPercentage(progress.getCompletionPercentage());
+		newProgress.setLessonId(progress.getLessonId());
 
 		progressRepository.save(newProgress);
 		return "Progress added successfully";
@@ -49,12 +51,15 @@ public class ProgressService implements IProgressService {
 	@Override
 	public String updateProgress(Progress progress) {
 		Optional<Progress> progressOptional = progressRepository.findById(progress.getId());
-		if (progressOptional.isEmpty())
+		if (progressOptional.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Progress " + progress.getId() + " not found");
+		}
 
 		Progress existingProgress = progressOptional.get();
-		existingProgress.setCompleted_tasks(progress.getCompleted_tasks());
-		existingProgress.setRequired_tasks(progress.getRequired_tasks());
+		existingProgress.setCompletedTasks(progress.getCompletedTasks());
+		existingProgress.setRequiredTasks(progress.getRequiredTasks());
+		existingProgress.setCompletionPercentage(progress.getCompletionPercentage());
+		existingProgress.setLessonId(progress.getLessonId());
 
 		progressRepository.save(existingProgress);
 		return "Progress updated successfully";
@@ -63,11 +68,9 @@ public class ProgressService implements IProgressService {
 	@Override
 	public void deleteProgress(Long id) {
 		Optional<Progress> progressOptional = progressRepository.findById(id);
-		if (progressOptional.isEmpty())
+		if (progressOptional.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Progress " + id + " not found");
-
+		}
 		progressRepository.deleteById(id);
 	}
-
-
 }

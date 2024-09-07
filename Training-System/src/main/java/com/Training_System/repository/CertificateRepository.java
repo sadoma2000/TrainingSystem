@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.Training_System.model.Certificate;
 
 @Repository
-public interface CertificateRepository extends JpaRepository<Certificate, Long>{
+public interface CertificateRepository extends JpaRepository<Certificate, Long> {
 
 	List<Certificate> findByStudentId(Long studentId);
 

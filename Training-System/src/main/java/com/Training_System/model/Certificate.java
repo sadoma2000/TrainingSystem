@@ -3,6 +3,7 @@ package com.Training_System.model;
 
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +22,15 @@ public class Certificate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Long Student_id;
-	private Long Course_id;
-	private Timestamp Issued_date;
-	private String Certificate_title;
+	@Column(name = "student_id")
+	private Long studentId;
+
+	@Column(name = "course_id")
+	private Long courseId;
+
+	@Column(name = "issued_date")
+	private Timestamp issuedDate;
+
+	@Column(name = "certificate_title")
+	private String certificateTitle;
 }

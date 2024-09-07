@@ -19,10 +19,10 @@ public class Progress {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Integer Completion_Percentage;
-	private Long Student_id;
-	private Long Course_id;
-	private Long Lesson_id;
-	private int completed_tasks;
-    private int required_tasks;
+	private Integer completionPercentage;
+	private Long studentId;
+	private Long courseId;
+	private Long lessonId;
+	private int completedTasks;
+	private int requiredTasks;
 }
