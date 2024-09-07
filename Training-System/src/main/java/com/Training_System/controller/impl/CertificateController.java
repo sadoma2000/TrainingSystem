@@ -1,6 +1,6 @@
 package com.Training_System.controller.impl;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,4 +99,3 @@ public class CertificateController {
         certificateService.deleteCertificate(id);
     }
 }
->>>>>>> branch 'master' of https://github.com/sadoma2000/TrainingSystem.git
