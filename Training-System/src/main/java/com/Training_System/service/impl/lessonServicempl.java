@@ -1,10 +1,13 @@
-package com.Training_System.models.service;
+package com.Training_System.service.impl;
 
-import com.Training_System.models.entity.Lesson;
-import com.Training_System.models.entity.Student;
-import com.Training_System.models.repository.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.Training_System.model.Lesson;
+import com.Training_System.repository.LessonRepository;
+import com.Training_System.service.interfaces.LessonService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 

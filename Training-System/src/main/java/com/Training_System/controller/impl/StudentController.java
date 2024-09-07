@@ -1,43 +1,44 @@
-package com.Training_System.models.controller;
+package com.Training_System.controller.impl;
 
-import com.Training_System.models.entity.Student;
-import com.Training_System.models.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.Training_System.model.Student;
+import com.Training_System.service.impl.StudentServicempl;
 
 import java.util.List;
 
 @RestController
 public class StudentController {
 
-    @Autowired
-    private StudentService StudentService;
+	@Autowired
+	private StudentServicempl StudentService;
 
-    @GetMapping
-    public List<Student> getAllStudents() {
-        return StudentService.getAllStudents();
-    }
+	@GetMapping
+	public List<Student> getAllStudents() {
+		return StudentService.getAllStudents();
+	}
 
-    @GetMapping("/getStudentById/{id}")
-    public Student getStudentById(@PathVariable Long id) {
-        return StudentService.getStudentById(id);
-    }
+	@GetMapping("/getStudentById/{id}")
+	public Student getStudentById(@PathVariable Long id) {
+		return StudentService.getStudentById(id);
+	}
 
-    @PostMapping("/addStudent")
-    public String addStudent(@RequestBody Student student) {
+	@PostMapping("/addStudent")
+	public String addStudent(@RequestBody Student student) {
 
-        return StudentService.addStudent(student);
-    }
+		return StudentService.addStudent(student);
+	}
 
-    @PutMapping("/updateStudent")
-    public String updateStudent(@RequestBody Student student) {
+	@PutMapping("/updateStudent")
+	public String updateStudent(@RequestBody Student student) {
 
-        return StudentService.updateStudent(student);
-    }
+		return StudentService.updateStudent(student);
+	}
 
 
-    @DeleteMapping("/deleteStudent/{id}")
-    public void deleteStudent(@PathVariable Long id) {
-        StudentService.deleteStudent(id);
-    }
+	@DeleteMapping("/deleteStudent/{id}")
+	public void deleteStudent(@PathVariable Long id) {
+		StudentService.deleteStudent(id);
+	}
 }
