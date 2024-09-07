@@ -48,7 +48,7 @@ public class CourseController implements ICourseController{
 	@PutMapping("/Course/Update/{id}")
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateCourse(@RequestBody Course updatedCourse, @PathVariable Long id) {
-		courseService.updateCourse(updatedCourse.getStart_date(),updatedCourse.getEnd_date(), id);
+		courseService.updateCourse(updatedCourse.getStartDate(),updatedCourse.getEndDate(), id);
 	}
 	//  **************************************************  DELETE  ***************************************************
 

@@ -21,10 +21,10 @@ public class InstructorService implements IInstructorService {
 	@Override
 	public void saveInstructor(Instructor instructor) {
 		Instructor newInstructor = new Instructor();
-		newInstructor.setFirst_name(instructor.getFirst_name());
-		newInstructor.setLast_name(instructor.getLast_name());
+		newInstructor.setFirstName(instructor.getFirstName());
+		newInstructor.setLastName(instructor.getLastName());
 		newInstructor.setDepartment(instructor.getDepartment());
-		newInstructor.setLanguage_spoken(instructor.getLanguage_spoken());
+		newInstructor.setLanguageSpoken(instructor.getLanguageSpoken());
 		newInstructor.setGender(instructor.getGender());
 
 		instructorRepository.save(newInstructor);
@@ -37,7 +37,7 @@ public class InstructorService implements IInstructorService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor " + id + " not found");
 
 		Instructor ins = instructorOptional.get();
-		ins.setLanguage_spoken(Language_spoken);
+		ins.setLanguageSpoken(Language_spoken);
 		instructorRepository.save(ins);
 	}
 

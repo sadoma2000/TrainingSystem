@@ -47,7 +47,7 @@ public class InstructorController implements IInstructorController{
 	@PutMapping("/Instructor/Update/{id}")
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateInstructor(@RequestBody Instructor instructor, @PathVariable Long id) {
-		instructorService.updateInstructor(instructor.getLanguage_spoken(), id);
+		instructorService.updateInstructor(instructor.getLanguageSpoken(), id);
 	}
 	//  **************************************************  DELETE  ***************************************************
 

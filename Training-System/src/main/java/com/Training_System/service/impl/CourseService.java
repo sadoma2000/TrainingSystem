@@ -23,11 +23,11 @@ public class CourseService implements ICourseService {
 	public void saveCourse(Course course) {
 		Course newCourse = new Course();
 		newCourse.setTopic(course.getTopic());
-		newCourse.setStart_date(course.getStart_date());
-		newCourse.setEnd_date(course.getEnd_date());
-		newCourse.setInstructor_id(course.getInstructor_id());
-		newCourse.setPasing_grade(course.getPasing_grade());
-		newCourse.setCourse_level(course.getCourse_level());
+		newCourse.setStartDate(course.getStartDate());
+		newCourse.setEndDate(course.getEndDate());
+		newCourse.setInstructor(course.getInstructor());
+		newCourse.setPassingGrade(course.getPassingGrade());
+		newCourse.setCourseLevel(course.getCourseLevel());
 		newCourse.setDescription(course.getDescription());
 
 		courseRepository.save(newCourse);
@@ -41,8 +41,8 @@ public class CourseService implements ICourseService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course " + id + " not found");
 
 		Course c = courseOptional.get();
-		c.setStart_date(Start_date);
-		c.setEnd_date(End_date);
+		c.setStartDate(Start_date);
+		c.setEndDate(End_date);
 		courseRepository.save(c);
 
 	}

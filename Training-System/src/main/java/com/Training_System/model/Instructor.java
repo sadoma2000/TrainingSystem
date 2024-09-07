@@ -1,10 +1,14 @@
 package com.Training_System.model;
 
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +23,12 @@ public class Instructor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String First_name;
-	private String Last_name;
-	private String Department;
-	private String Language_spoken;
-	private String Gender;
+	private String firstName;  
+	private String lastName;
+	private String department;
+	private String languageSpoken;  
+	private String gender;
+
+	@OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+	private List<Course> courseList;  // Relationship with Course
 }

@@ -9,6 +9,7 @@ import com.Training_System.service.impl.StudentServicempl;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
 	@Autowired

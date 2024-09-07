@@ -10,6 +10,7 @@ import com.Training_System.service.interfaces.LessonService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/lessons")
 public class LessonController {
 
 	@Autowired

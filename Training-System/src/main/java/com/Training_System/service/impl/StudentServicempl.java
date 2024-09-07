@@ -38,15 +38,16 @@ public class StudentServicempl implements StudentService {
 			studentRepository.save(student);
 			return "Student Saved Successfully.";
 		} else {
-			throw new StudentAlreadyExistsException("Student Already Exists!");
+			//throw new StudentAlreadyExistsException("Student Already Exists!");
 		}
+		return null;
 	}
 
 	@Override
 	public String updateStudent(Student student) {
 		Student exist = studentRepository.findById(student.getId()).orElse(null);
 		if (exist == null) {
-			throw new NoSuchStudentException("No Student Exists!");
+			//throw new NoSuchStudentException("No Student Exists!");
 		} else {
 			exist.setFirst_name(student.getFirst_name());
 			exist.setLast_name(student.getLast_name());
@@ -58,6 +59,7 @@ public class StudentServicempl implements StudentService {
 			studentRepository.save(exist);
 			return "Student Updated Successfully!";
 		}
+		return null;
 	}
 
 	@Override
