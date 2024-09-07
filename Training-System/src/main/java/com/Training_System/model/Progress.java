@@ -23,4 +23,6 @@ public class Progress {
 	private Long Student_id;
 	private Long Course_id;
 	private Long Lesson_id;
+	private int completed_tasks;
+    private int required_tasks;
 }

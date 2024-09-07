@@ -44,17 +44,20 @@ public class ReviewController {
 
 	@PostMapping("/addReview")
 	public String addReview(@RequestBody Review review) {
-		return reviewService.addReview(review);
+		reviewService.saveReview(review);
+		return "Review added successfully";
 	}
 
-	@PutMapping("/updateReview")
-	public String updateReview(@RequestBody Review review) {
-		return reviewService.updateReview(review);
+	@PutMapping("/updateReview/{id}")
+	public String updateReview(@RequestBody String reviewText, @PathVariable Long id) {
+		reviewService.updateReview(reviewText, id);
+		return "Review updated successfully";
 	}
 
 	@DeleteMapping("/deleteReview/{id}")
-	public void deleteReview(@PathVariable Long id) {
+	public String deleteReview(@PathVariable Long id) {
 		reviewService.deleteReview(id);
+		return "Review deleted successfully";
 	}
 }
 

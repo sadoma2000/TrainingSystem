@@ -30,7 +30,7 @@ public class Review {
 	@JoinColumn(name = "Course_id", referencedColumnName = "id")
 	private Course course;
 
-	private String Review_text;
-	private Timestamp Review_date;
+	private String ReviewText;
+	private Timestamp ReviewDate;
 
 }

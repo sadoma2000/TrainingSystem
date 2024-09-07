@@ -1,12 +1,22 @@
 package com.Training_System.service.interfaces;
 
+import java.util.List;
+
 import com.Training_System.model.Progress;
 
 public interface IProgressService {
 
-	void saveProgress(Progress progress);
+	String addProgress(Progress progress);
 
-    void updateProgress(int completedTasks, Long id);
+	String updateProgress(Progress progress);
 
-    void deleteProgress(Long id);
+	void deleteProgress(Long id);
+
+	Progress getProgressById(Long id);
+
+	List<Progress> getAllProgress();
+
+	List<Progress> getProgressByStudentId(Long studentId);
 }
+
+
