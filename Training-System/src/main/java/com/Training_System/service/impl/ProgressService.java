@@ -22,8 +22,10 @@ public class ProgressService implements IProgressService {
 		Progress newProgress = new Progress();
 		newProgress.setStudent_id(progress.getStudent_id());
 		newProgress.setCourse_id(progress.getCourse_id());
-		newProgress.setCompleted_tasks(progress.getCompleted_tasks());
-		newProgress.setRequired_tasks(progress.getRequired_tasks());
+		/*
+		 * newProgress.setCompleted_tasks(progress.getCompleted_tasks());
+		 * newProgress.setRequired_tasks(progress.getRequired_tasks());
+		 */
 
 		progressRepository.save(newProgress);
 	}
@@ -35,7 +37,7 @@ public class ProgressService implements IProgressService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Progress " + id + " not found");
 
 		Progress p = progressOptional.get();
-		p.setCompleted_tasks(completedTasks);
+		//p.setCompleted_tasks(completedTasks);
 		progressRepository.save(p);
 	}
 
