@@ -23,14 +23,14 @@ public class EnrollmentController {
 	private EnrollmentService enrollmentService;
 
 	//Retrieve all enrolments
-	@GetMapping
+	@GetMapping("/get-all")
 	public List<Enrollment> getAllEnrollments() {
 		return enrollmentService.getAllEnrollments();
 	}
 
 
 	//Retrieve a specific enrolment by ID
-	@GetMapping("/{id}")
+	@GetMapping("/get-by-id/{id}")
 	public Enrollment getEnrollmentById(@PathVariable Long id) {
 		return enrollmentService.getEnrollmentById(id);
 	}
@@ -42,13 +42,13 @@ public class EnrollmentController {
 	}
 
 	//Update an existing enrolment by ID
-	@PutMapping("/{id}")
+	@PutMapping("/update/{id}")
 	public Enrollment updateEnrollment(@PathVariable Long id, @RequestBody Enrollment enrollment) {
 		return enrollmentService.updateEnrollment(id, enrollment);
 	}
 
 	//Delete an enrolment by ID
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteEnrollment(@PathVariable Long id) {
 		enrollmentService.deleteEnrollment(id);
 	}
