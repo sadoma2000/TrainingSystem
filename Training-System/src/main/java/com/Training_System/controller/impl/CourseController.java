@@ -1,8 +1,9 @@
 package com.Training_System.controller.impl;
 
-import java.util.List;
 
+import com.Training_System.model.Certificate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.Training_System.repository.CourseRepository;
 import com.Training_System.service.interfaces.ICourseService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/Course")
 public class CourseController implements ICourseController{
 
 	@Autowired
@@ -28,34 +29,32 @@ public class CourseController implements ICourseController{
 	ICourseService courseService;
 
 	//  ****************************************************  GET  ****************************************************
-
 	@Override
-	@GetMapping("/AllCourses")
-	public List<Course> getAllCourses() {
-		return courseRepository.findAll();
+	@GetMapping("/get-all")
+	public ResponseEntity getAllCourses() {
+		return ResponseEntity.status(200).body(courseRepository.findAll());
 	}
 
 	//  ***************************************************  POST  ****************************************************
-
-	@PostMapping("/AddCourse")
+	@PostMapping("/add")
 	//@ResponseStatus(HttpStatus.CREATED)
-	public void saveCourse(@RequestBody Course course) {
+	public ResponseEntity saveCourse(@RequestBody Course course) {
 		courseService.saveCourse(course);
+		return ResponseEntity.status(201).body("Course added successfully");
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-
-	@PutMapping("/Course/Update/{id}")
-	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateCourse(@RequestBody Course updatedCourse, @PathVariable Long id) {
+	@PutMapping("/update/{id}")
+	public ResponseEntity updateCourse(@RequestBody Course updatedCourse, @PathVariable Long id) {
 		courseService.updateCourse(updatedCourse.getStartDate(),updatedCourse.getEndDate(), id);
+		return ResponseEntity.status(201).body("Course updated successfully");
 	}
+
 	//  **************************************************  DELETE  ***************************************************
-
-	@DeleteMapping("/Course/{id}")
+	@DeleteMapping("/delete/{id}")
 	// @ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteCourse(@PathVariable Long id) {
+	public ResponseEntity deleteCourse(@PathVariable Long id) {
 		courseService.deleteCourse(id);
+		return ResponseEntity.status(201).body("Course deleted successfully");
 	}
-
 }

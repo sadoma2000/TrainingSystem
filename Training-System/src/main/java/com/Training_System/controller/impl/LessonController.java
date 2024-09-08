@@ -1,7 +1,10 @@
 package com.Training_System.controller.impl;
 
 
+import com.Training_System.model.Certificate;
+import com.Training_System.model.Enrollment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.Training_System.model.Lesson;
@@ -16,36 +19,41 @@ public class LessonController {
 	@Autowired
 	private LessonService lessonService;
 
-	@GetMapping
-	public List<Lesson> getAllLessons() {
-		return lessonService.getAllLessons();
-	}
-	@GetMapping("/getLessonsByCourseId/{courseId}")
-	public List<Lesson> getLessonsByCourseId(@PathVariable Long courseId) {
-		return lessonService.getLessonsByCourseId(courseId);
+	//  ****************************************************  GET  ****************************************************
+	@GetMapping("/get-all")
+	public ResponseEntity getAllLessons() {
+		return ResponseEntity.status(200).body(lessonService.getAllLessons());
 	}
 
-	@GetMapping("/getLessonById/{id}")
-	public Lesson getLessonById(@PathVariable Long id) {
-		return lessonService.getLessonById(id);
+	@GetMapping("/get-by-Lesson/{courseId}")
+	public ResponseEntity getLessonsByCourseId(@PathVariable Long courseId) {
+		return ResponseEntity.status(200).body(lessonService.getLessonsByCourseId(courseId));
 	}
 
-	@PostMapping("/addLesson")
-	public String addLesson(@RequestBody Lesson lesson) {
-
-		return lessonService.addLesson(lesson);
+	@GetMapping("/get-by-id/{id}")
+    public ResponseEntity getLessonById(@PathVariable Long id) {
+		return ResponseEntity.status(200).body(lessonService.getLessonById(id));
 	}
 
-	@PutMapping("/updateLesson")
-	public String updateLesson(@RequestBody Lesson lesson) {
-
-		return lessonService.updateLesson(lesson);
+	//  ***************************************************  POST  ****************************************************
+	@PostMapping("/add")
+	public ResponseEntity addLesson(@RequestBody Lesson lesson) {
+		lessonService.addLesson(lesson);
+		return ResponseEntity.status(201).body("Lesson added successfully");
 	}
 
+	//  ****************************************************  PUT  ****************************************************
+	@PutMapping("/update")
+	public ResponseEntity updateLesson(@RequestBody Lesson lesson) {
+		lessonService.updateLesson(lesson);
+		return ResponseEntity.status(201).body("Lesson updated successfully");
+	}
 
-	@DeleteMapping("/deleteLesson/{id}")
-	public void deleteLesson(@PathVariable Long id) {
+	//  **************************************************  DELETE  ***************************************************
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity deleteLesson(@PathVariable Long id) {
 		lessonService.deleteLesson(id);
+		return ResponseEntity.status(201).body("Lesson deleted successfully");
 	}
 }
 

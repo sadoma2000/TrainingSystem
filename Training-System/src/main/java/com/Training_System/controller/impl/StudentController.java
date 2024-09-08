@@ -1,12 +1,14 @@
 package com.Training_System.controller.impl;
 
+import com.Training_System.model.Lesson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.Training_System.model.Student;
 import com.Training_System.service.impl.StudentServicempl;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/students")
@@ -15,31 +17,36 @@ public class StudentController {
 	@Autowired
 	private StudentServicempl StudentService;
 
-	@GetMapping
-	public List<Student> getAllStudents() {
-		return StudentService.getAllStudents();
+
+	//  ****************************************************  GET  ****************************************************
+	@GetMapping("/get-all")
+	public ResponseEntity getAllStudents() {
+		return ResponseEntity.status(200).body(StudentService.getAllStudents());
 	}
 
-	@GetMapping("/getStudentById/{id}")
-	public Student getStudentById(@PathVariable Long id) {
-		return StudentService.getStudentById(id);
+	@GetMapping("/get-by-id/{id}")
+	public ResponseEntity getStudentById(@PathVariable Long id) {
+		return ResponseEntity.status(200).body(StudentService.getStudentById(id));
 	}
 
-	@PostMapping("/addStudent")
-	public String addStudent(@RequestBody Student student) {
-
-		return StudentService.addStudent(student);
+	//  ***************************************************  POST  ****************************************************
+	@PostMapping("/add")
+	public ResponseEntity addStudent(@RequestBody Student student) {
+		StudentService.addStudent(student);
+		return ResponseEntity.status(201).body("Student added successfully");
 	}
 
-	@PutMapping("/updateStudent")
-	public String updateStudent(@RequestBody Student student) {
-
-		return StudentService.updateStudent(student);
+	//  ****************************************************  PUT  ****************************************************
+	@PutMapping("/update")
+	public ResponseEntity updateStudent(@RequestBody Student student) {
+		StudentService.updateStudent(student);
+		return ResponseEntity.status(201).body("Student updated successfully");
 	}
 
-
-	@DeleteMapping("/deleteStudent/{id}")
-	public void deleteStudent(@PathVariable Long id) {
+	//  **************************************************  DELETE  ***************************************************
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity deleteStudent(@PathVariable Long id) {
 		StudentService.deleteStudent(id);
+		return ResponseEntity.status(201).body("Student deleted successfully");
 	}
-}
+	}

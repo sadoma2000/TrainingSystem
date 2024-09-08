@@ -1,8 +1,9 @@
 package com.Training_System.controller.impl;
 
-import java.util.List;
 
+import com.Training_System.model.Lesson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,34 +23,42 @@ public class ProgressController {
 	@Autowired
 	private ProgressService progressService;
 
-	@GetMapping("/getAllProgress")
-	public List<Progress> getAllProgress() {
-		return progressService.getAllProgress();
+	//  ****************************************************  GET  ****************************************************
+	@GetMapping("/get-all")
+	public ResponseEntity getAllProgress() {
+		return ResponseEntity.status(200).body(progressService.getAllProgress());
 	}
 
-	@GetMapping("/getProgressByStudentId/{studentId}")
-	public List<Progress> getProgressByStudentId(@PathVariable Long studentId) {
-		return progressService.getProgressByStudentId(studentId);
+	@GetMapping("/get-by-Progress/{studentId}")
+	public ResponseEntity getProgressByStudentId(@PathVariable Long studentId) {
+		return ResponseEntity.status(200).body(progressService.getProgressByStudentId(studentId));
 	}
 
-	@GetMapping("/getProgressById/{id}")
-	public Progress getProgressById(@PathVariable Long id) {
-		return progressService.getProgressById(id);
+	@GetMapping("/get-by-id/{id}")
+    public ResponseEntity getProgressById(@PathVariable Long id) {
+		return ResponseEntity.status(200).body(progressService.getProgressById(id));
 	}
 
-	@PostMapping("/addProgress")
-	public String addProgress(@RequestBody Progress progress) {
-		return progressService.addProgress(progress);
+	//  ***************************************************  POST  ****************************************************
+	@PostMapping("/add")
+	public ResponseEntity addProgress(@RequestBody Progress progress) {
+		progressService.addProgress(progress);
+		return ResponseEntity.status(201).body("Progress added successfully");
 	}
 
-	@PutMapping("/updateProgress")
-	public String updateProgress(@RequestBody Progress progress) {
-		return progressService.updateProgress(progress);
+	//  ****************************************************  PUT  ****************************************************
+	@PutMapping("/update")
+	public ResponseEntity updateProgress(@RequestBody Progress progress) {
+		progressService.updateProgress(progress);
+		return ResponseEntity.status(201).body("Progress updated successfully");
 	}
 
-	@DeleteMapping("/deleteProgress/{id}")
-	public void deleteProgress(@PathVariable Long id) {
+	//  **************************************************  DELETE  ***************************************************
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity deleteProgress(@PathVariable Long id) {
 		progressService.deleteProgress(id);
+		return ResponseEntity.status(201).body("Progress deleted successfully");
 	}
+
 }
 

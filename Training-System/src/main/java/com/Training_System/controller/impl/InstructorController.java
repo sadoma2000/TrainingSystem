@@ -1,8 +1,9 @@
 package com.Training_System.controller.impl;
 
-import java.util.List;
 
+import com.Training_System.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.Training_System.repository.InstructorRepository;
 import com.Training_System.service.interfaces.IInstructorService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/Instructors")
 public class InstructorController implements IInstructorController{
 
 	@Autowired
@@ -28,32 +29,32 @@ public class InstructorController implements IInstructorController{
 	IInstructorService instructorService;
 
 	//  ****************************************************  GET  ****************************************************
-
-	@GetMapping("/AllInstructors")
-	public List<Instructor> getAllInstructors() {
-		return instructorRepository.findAll();
+	@GetMapping("/get-all")
+	public ResponseEntity getAllInstructors() {
+		return ResponseEntity.status(200).body(instructorRepository.findAll());
 	}
 
 	//  ***************************************************  POST  ****************************************************
-
-	@PostMapping("/AddInstructor")
+	@PostMapping("/add")
 	//@ResponseStatus(HttpStatus.CREATED)
-	public void saveInstructor(@RequestBody Instructor instructor) {
+	public ResponseEntity saveInstructor(@RequestBody Instructor instructor) {
 		instructorService.saveInstructor(instructor);
+		return ResponseEntity.status(201).body("Instructor added successfully");
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-
-	@PutMapping("/Instructor/Update/{id}")
+	@PutMapping("/update/{id}")
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateInstructor(@RequestBody Instructor instructor, @PathVariable Long id) {
+	public ResponseEntity updateInstructor(@RequestBody Instructor instructor, @PathVariable Long id) {
 		instructorService.updateInstructor(instructor.getLanguageSpoken(), id);
+		return ResponseEntity.status(201).body("Instructor updated successfully");
 	}
-	//  **************************************************  DELETE  ***************************************************
 
-	@DeleteMapping("/Instructor/{id}")
+	//  **************************************************  DELETE  ***************************************************
+	@DeleteMapping("/delete/{id}")
 	// @ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteExercise(@PathVariable Long id) {
+	public ResponseEntity deleteExercise(@PathVariable Long id) {
 		instructorService.deleteInstructor(id);
+		return ResponseEntity.status(201).body("Instructor deleted successfully");
 	}
 }

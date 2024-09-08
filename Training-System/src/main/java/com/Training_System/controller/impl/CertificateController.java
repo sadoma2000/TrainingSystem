@@ -21,6 +21,7 @@ public class CertificateController {
 	@Autowired
 	private CertificateService certificateService;
 
+	//  ****************************************************  GET  ****************************************************
 	@GetMapping("/get-all")
 	public ResponseEntity getAllCertificates() {
 		return ResponseEntity.status(200).body(certificateService.getAllCertificates());
@@ -36,18 +37,21 @@ public class CertificateController {
 		return ResponseEntity.status(200).body(certificateService.getCertificateById(id));
 	}
 
+	//  ***************************************************  POST  ****************************************************
 	@PostMapping("/add")
 	public ResponseEntity addCertificate(@RequestBody Certificate certificate) {
 		certificateService.addCertificate(certificate);
 		return ResponseEntity.status(201).body("Certificate added successfully");
 	}
 
+	//  ****************************************************  PUT  ****************************************************
 	@PutMapping("/update")
 	public ResponseEntity updateCertificate(@RequestBody Certificate certificate) {
 		certificateService.updateCertificate(certificate);
 		return ResponseEntity.status(201).body("Certificate updated successfully");
 	}
 
+	//  **************************************************  DELETE  ***************************************************
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity deleteCertificate(@PathVariable Long id) {
 		certificateService.deleteCertificate(id);
