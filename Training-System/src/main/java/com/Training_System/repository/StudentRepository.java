@@ -7,4 +7,5 @@ import com.Training_System.model.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+    Student findStudentById(long id);
 }

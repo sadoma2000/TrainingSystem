@@ -2,14 +2,13 @@ package com.Training_System.service.impl;
 
 
 
+import com.Training_System.Api.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Training_System.model.Student;
 import com.Training_System.repository.StudentRepository;
 import com.Training_System.service.interfaces.StudentService;
-
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class StudentServicempl implements StudentService {
 	@Override
 	public Student getStudentById(Long id) {
 		return studentRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Student not found with id " + id));
+				.orElseThrow(() -> new ApiException("Student not found with id " + id));
 	}
 
 	@Override
@@ -38,16 +37,15 @@ public class StudentServicempl implements StudentService {
 			studentRepository.save(student);
 			return "Student Saved Successfully.";
 		} else {
-			//throw new StudentAlreadyExistsException("Student Already Exists!");
+			throw new ApiException("Student Already Exists!");
 		}
-		return null;
 	}
 
 	@Override
 	public String updateStudent(Student student) {
 		Student exist = studentRepository.findById(student.getId()).orElse(null);
 		if (exist == null) {
-			//throw new NoSuchStudentException("No Student Exists!");
+			throw new ApiException("No Student Exists!");
 		} else {
 			exist.setFirst_name(student.getFirst_name());
 			exist.setLast_name(student.getLast_name());
@@ -59,7 +57,6 @@ public class StudentServicempl implements StudentService {
 			studentRepository.save(exist);
 			return "Student Updated Successfully!";
 		}
-		return null;
 	}
 
 	@Override

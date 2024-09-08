@@ -1,13 +1,12 @@
 package com.Training_System.service.impl;
 
+import com.Training_System.Api.ApiException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.Training_System.model.Review;
 import com.Training_System.repository.ReviewRepository;
 import com.Training_System.service.interfaces.IReviewService;
-
-import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +28,7 @@ public class ReviewService implements IReviewService {
 	@Override
 	public Review getReviewById(Long id) {
 		return reviewRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Review not found with id " + id));
+				.orElseThrow(() -> new ApiException("Review not found with id " + id));
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.Training_System.service.impl;
 
+import com.Training_System.Api.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,18 @@ public class lessonServicempl implements LessonService{
 	// Get lessons by course ID
 	@Override
 	public List<Lesson> getLessonsByCourseId(Long courseId) {
-		return lessonRepository.findByCourseId(courseId);
-		//.set(() -> new EntityNotFoundException("Lesson not found with course id " + courseId));
+		List<Lesson> lessons = lessonRepository.findByCourseId(courseId);
+		if (lessons.isEmpty()){
+			throw new ApiException("Lesson not found with course id " + courseId);
+		}
+		return lessons;
 	}
 
 	// Get lesson by ID
 	@Override
 	public Lesson getLessonById(Long id) {
 		return lessonRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Lesson not found with id " + id));
+				.orElseThrow(() -> new ApiException("Lesson not found with id " + id));
 	}
 
 	// Create a new lesson
@@ -45,9 +49,8 @@ public class lessonServicempl implements LessonService{
 			lessonRepository.save(lesson);
 			return "Lesson Saved Successfully.";
 		} else {
-			// throw new lessonAlreadyExistsException("Lesson Already Exists!");
+			throw new ApiException("Lesson Already Exists!");
 		}
-		return null;
 	}
 
 	// Update an existing lesson
@@ -55,7 +58,7 @@ public class lessonServicempl implements LessonService{
 	public String updateLesson(Lesson lesson) {
 		Lesson exist = lessonRepository.findById(lesson.getId()).orElse(null);
 		if (exist == null) {
-			// throw new NoSuchlessonException("No Lesson Exists!");
+			 throw new ApiException("No Lesson Exists!");
 		} else {
 			exist.setCourse(lesson.getCourse());
 			exist.setTitle(lesson.getTitle());
@@ -66,7 +69,6 @@ public class lessonServicempl implements LessonService{
 			lessonRepository.save(exist);
 			return "Lesson Updated Successfully!";
 		}
-		return null;
 	}
 
 	@Override

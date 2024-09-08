@@ -7,5 +7,5 @@ import com.Training_System.model.Course;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long>{
-
+    Course findCourseById(long id);
 }

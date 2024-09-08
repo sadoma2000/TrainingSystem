@@ -7,5 +7,6 @@ import com.Training_System.model.Enrollment;
 
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long>{
+    Enrollment findEnrollmentById(long id);
 
 }

@@ -10,6 +10,7 @@ import com.Training_System.model.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>{
+	Review findReviewById(long id);
 
 	List<Review> findByCourseId(Long courseId);
 
