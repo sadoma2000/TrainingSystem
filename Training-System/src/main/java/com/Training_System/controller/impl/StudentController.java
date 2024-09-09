@@ -37,7 +37,7 @@ public class StudentController {
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public ResponseEntity updateStudent(@RequestBody Student student) {
 		StudentService.updateStudent(student);
 		return ResponseEntity.status(201).body("Student updated successfully");
