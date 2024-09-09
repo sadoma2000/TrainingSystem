@@ -47,9 +47,9 @@ public class ProgressController {
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update")
-	public ResponseEntity updateProgress(@RequestBody Progress progress) {
-		progressService.updateProgress(progress);
+	@PutMapping("/update/{id}")
+	public ResponseEntity updateProgress(@RequestBody Progress progress, @PathVariable Long id) {
+		progressService.updateProgress(progress, id);
 		return ResponseEntity.status(201).body("Progress updated successfully");
 	}
 
