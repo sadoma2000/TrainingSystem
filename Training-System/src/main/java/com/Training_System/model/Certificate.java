@@ -4,11 +4,7 @@ package com.Training_System.model;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +19,13 @@ public class Certificate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "student_id")
-	private Long studentId;
+	@ManyToOne
+	@JoinColumn(name = "student_id", referencedColumnName = "id")
+	private Student student;
 
-	@Column(name = "course_id")
-	private Long courseId;
+	@ManyToOne
+	@JoinColumn(name = "course_id", referencedColumnName = "id")
+	private Course course;
 
 	@Column(name = "issued_date")
 	private LocalDate issuedDate; //changed

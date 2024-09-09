@@ -29,6 +29,6 @@ public class Instructor {
 	private String languageSpoken;  
 	private String gender;
 
-	@OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
-	private List<Course> courseList;  // Relationship with Course
+	@OneToMany(mappedBy = "instructor")
+	private List<Course> courseList = new ArrayList<>();
 }

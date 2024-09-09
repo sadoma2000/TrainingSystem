@@ -22,10 +22,10 @@ public class Lesson {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "Course_id", referencedColumnName = "id")
+	@JoinColumn(name = "course_id", referencedColumnName = "id")
 	private Course course;
 
 	private String Title;
-	private Integer Lesson_number;
-	private String Content_summary;
+	private Integer lessonNumber;
+	private String contentSummary;
 }

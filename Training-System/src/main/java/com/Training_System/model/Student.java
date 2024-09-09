@@ -19,9 +19,9 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String First_name;
-	private String Last_name;
-	private String Email;
-	private String Major;
-	private String Gender;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String major;
+	private String gender;
 }

@@ -42,7 +42,7 @@ public class CertificateService implements ICertificateService {
 	}
 
 	@Override
-	public String updateCertificate(Certificate certificate) {
+	public String updateCertificate(Certificate certificate,Long id) {
 		Optional<Certificate> existingCertificateOptional = certificateRepository.findById(certificate.getId());
 		if (existingCertificateOptional.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + certificate.getId() + " not found");

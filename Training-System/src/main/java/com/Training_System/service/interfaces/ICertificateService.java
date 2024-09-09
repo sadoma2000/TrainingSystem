@@ -12,7 +12,7 @@ public interface ICertificateService {
 
 	Certificate getCertificateById(Long id);
 
-	String addCertificate(Certificate certificate);
+	String addCertificate(Certificate certificate,Long id);
 
 	String updateCertificate(Certificate certificate);
 
