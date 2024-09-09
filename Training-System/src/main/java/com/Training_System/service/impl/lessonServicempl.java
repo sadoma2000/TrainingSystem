@@ -1,6 +1,11 @@
 package com.Training_System.service.impl;
 
 import com.Training_System.Api.ApiException;
+import com.Training_System.model.Course;
+import com.Training_System.model.Instructor;
+import com.Training_System.repository.CourseRepository;
+import com.Training_System.repository.InstructorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +18,14 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class lessonServicempl implements LessonService{
 
 	@Autowired
 	private LessonRepository lessonRepository;
+
+    private final InstructorRepository instructorRepository;
+    private final CourseRepository courseRepository;
 
 	// Get all lessons
 	@Override
@@ -42,15 +51,18 @@ public class lessonServicempl implements LessonService{
 	}
 
 	// Create a new lesson
-	@Override
-	public String addLesson(Lesson lesson) {
-		Lesson exist = lessonRepository.findById(lesson.getId()).orElse(null);
-		if (exist == null) {
+	//@Override
+	public String addLesson(Long instructorId, Long courseId, Lesson lesson) {
+		Course course = courseRepository.findCourseById(courseId);
+
+		if(course.getInstructor().getId()==instructorId){
+			throw new ApiException("This course does not belong to this instructor");
+		}
+
+			course.setNumberOfLessons(course.getNumberOfLessons()+1);
+			courseRepository.save(course);
 			lessonRepository.save(lesson);
 			return "Lesson Saved Successfully.";
-		} else {
-			throw new ApiException("Lesson Already Exists!");
-		}
 	}
 
 	// Update an existing lesson

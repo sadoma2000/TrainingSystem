@@ -1,5 +1,8 @@
 package com.Training_System.service.impl;
 
+import com.Training_System.model.Instructor;
+import com.Training_System.repository.InstructorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,23 +17,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 @Service
+@RequiredArgsConstructor
 public class CourseService implements ICourseService {
 
 	@Autowired
 	CourseRepository courseRepository;
 
+	private final InstructorRepository instructorRepository;
+
+
 	@Override
-	public void saveCourse(Course course) {
+	public void saveCourse(Long instructorId,Course course) {
 		Course newCourse = new Course();
 		newCourse.setTopic(course.getTopic());
 		newCourse.setStartDate(course.getStartDate());
 		newCourse.setEndDate(course.getEndDate());
-		newCourse.setInstructor(course.getInstructor());
+		newCourse.setInstructor(instructorRepository.findInstructorById(instructorId));
 		newCourse.setNumberOfLessons(course.getNumberOfLessons());
 		newCourse.setCourseLevel(course.getCourseLevel());
 		newCourse.setDescription(course.getDescription());
 
-		courseRepository.save(newCourse);
+		courseRepository.save(course);
 
 	}
 

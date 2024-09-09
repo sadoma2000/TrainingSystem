@@ -10,7 +10,7 @@ public interface LessonService {
 	List<Lesson> getAllLessons();
 	List<Lesson> getLessonsByCourseId(Long courseId);
 	Lesson getLessonById(Long id);
-	String addLesson(Lesson lesson);
+	//String addLesson(Lesson lesson);
 	String updateLesson(Lesson lesson);
 	void deleteLesson(Long id);
 }

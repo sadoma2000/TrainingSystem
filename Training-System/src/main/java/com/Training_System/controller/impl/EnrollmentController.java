@@ -4,14 +4,7 @@ package com.Training_System.controller.impl;
 import com.Training_System.model.Certificate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.Training_System.model.Enrollment;
 import com.Training_System.service.impl.EnrollmentService;
@@ -38,9 +31,9 @@ public class EnrollmentController {
 
 	//  ***************************************************  POST  ****************************************************
 	//Create a new enrolment
-	@PostMapping("/add")
-	public ResponseEntity createEnrollment(@RequestBody Enrollment enrollment) {
-		enrollmentService.createEnrollment(enrollment);
+	@PostMapping("/add/{studentId}/{courseId}")
+	public ResponseEntity createEnrollment(@PathVariable Long studentId, @PathVariable Long courseId, @RequestBody Enrollment enrollment) {
+		enrollmentService.createEnrollment(studentId,courseId);
 		return ResponseEntity.status(201).body("Enrollment added successfully");
 	}
 
@@ -51,6 +44,8 @@ public class EnrollmentController {
 		enrollmentService.updateEnrollment(id, enrollment);
 		return ResponseEntity.status(201).body("Enrollment updated successfully");
 	}
+
+	//ADD REJECT CONTROLLER
 
 	//  **************************************************  DELETE  ***************************************************
 	//Delete an enrolment by ID

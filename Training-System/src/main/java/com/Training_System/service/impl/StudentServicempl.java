@@ -52,8 +52,6 @@ public class StudentServicempl implements StudentService {
 			exist.setEmail(student.getEmail());
 			exist.setMajor(student.getMajor());
 			exist.setGender(student.getGender());
-
-
 			studentRepository.save(exist);
 			return "Student Updated Successfully!";
 		}

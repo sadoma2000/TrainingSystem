@@ -29,17 +29,17 @@ public class CourseController implements ICourseController{
 	ICourseService courseService;
 
 	//  ****************************************************  GET  ****************************************************
-	@Override
+	//@Override
 	@GetMapping("/get-all")
 	public ResponseEntity getAllCourses() {
 		return ResponseEntity.status(200).body(courseRepository.findAll());
 	}
 
 	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add")
+	@PostMapping("/add/{instructorId}")
 	//@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity saveCourse(@RequestBody Course course) {
-		courseService.saveCourse(course);
+	public ResponseEntity saveCourse(@PathVariable Long instructorId, @RequestBody Course course) {
+		courseService.saveCourse(instructorId,course);
 		return ResponseEntity.status(201).body("Course added successfully");
 	}
 

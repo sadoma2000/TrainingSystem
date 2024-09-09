@@ -2,6 +2,7 @@ package com.Training_System.model;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class Certificate {
 	private Long courseId;
 
 	@Column(name = "issued_date")
-	private Timestamp issuedDate;
+	private LocalDate issuedDate; //changed
 
 	@Column(name = "certificate_title")
 	private String certificateTitle;
