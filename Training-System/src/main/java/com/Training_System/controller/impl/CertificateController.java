@@ -45,9 +45,9 @@ public class CertificateController {
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update")
-	public ResponseEntity updateCertificate(@RequestBody Certificate certificate) {
-		certificateService.updateCertificate(certificate);
+	@PutMapping("/update/{id}")
+	public ResponseEntity updateCertificate(@RequestBody Certificate certificate, @PathVariable Long id) {
+                certificateService.updateCertificate(certificate, id); 
 		return ResponseEntity.status(201).body("Certificate updated successfully");
 	}
 
