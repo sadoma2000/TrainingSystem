@@ -36,7 +36,7 @@ public class Course {
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	private List<Lesson> lessonList;
 
-	private Integer passingGrade;  
+	private Integer NumberOfLessons;
 	private String courseLevel;
 	private String description;
 }

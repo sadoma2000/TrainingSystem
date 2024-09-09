@@ -26,7 +26,7 @@ public class CourseService implements ICourseService {
 		newCourse.setStartDate(course.getStartDate());
 		newCourse.setEndDate(course.getEndDate());
 		newCourse.setInstructor(course.getInstructor());
-		newCourse.setPassingGrade(course.getPassingGrade());
+		newCourse.setNumberOfLessons(course.getNumberOfLessons());
 		newCourse.setCourseLevel(course.getCourseLevel());
 		newCourse.setDescription(course.getDescription());
 

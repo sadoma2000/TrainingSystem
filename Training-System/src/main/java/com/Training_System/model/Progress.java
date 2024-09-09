@@ -23,6 +23,6 @@ public class Progress {
 	private Long studentId;
 	private Long courseId;
 	private Long lessonId;
-	private int completedTasks;
-	private int requiredTasks;
+	private int completedLessons;
+	private int requiredLessons;
 }

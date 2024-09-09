@@ -39,8 +39,8 @@ public class ProgressService implements IProgressService {
 		Progress newProgress = new Progress();
 		newProgress.setStudentId(progress.getStudentId());
 		newProgress.setCourseId(progress.getCourseId());
-		newProgress.setCompletedTasks(progress.getCompletedTasks());
-		newProgress.setRequiredTasks(progress.getRequiredTasks());
+		newProgress.setCompletedLessons(progress.getCompletedLessons());
+		newProgress.setRequiredLessons(progress.getRequiredLessons());
 		newProgress.setCompletionPercentage(progress.getCompletionPercentage());
 		newProgress.setLessonId(progress.getLessonId());
 
@@ -56,8 +56,8 @@ public class ProgressService implements IProgressService {
 		}
 
 		Progress existingProgress = progressOptional.get();
-		existingProgress.setCompletedTasks(progress.getCompletedTasks());
-		existingProgress.setRequiredTasks(progress.getRequiredTasks());
+		existingProgress.setCompletedLessons(progress.getCompletedLessons());
+		existingProgress.setRequiredLessons(progress.getRequiredLessons());
 		existingProgress.setCompletionPercentage(progress.getCompletionPercentage());
 		existingProgress.setLessonId(progress.getLessonId());
 
