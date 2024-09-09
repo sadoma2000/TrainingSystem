@@ -43,7 +43,7 @@ public class LessonController {
 	}
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public ResponseEntity updateLesson(@RequestBody Lesson lesson) {
 		lessonService.updateLesson(lesson);
 		return ResponseEntity.status(201).body("Lesson updated successfully");
