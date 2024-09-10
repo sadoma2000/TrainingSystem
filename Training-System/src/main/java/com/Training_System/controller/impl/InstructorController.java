@@ -2,6 +2,9 @@ package com.Training_System.controller.impl;
 
 
 import com.Training_System.model.Course;
+import com.Training_System.model.DTO.InstructorDTO;
+import com.Training_System.service.impl.InstructorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,15 +22,16 @@ import com.Training_System.service.interfaces.IInstructorService;
 
 @RestController
 @RequestMapping("/api/Instructors")
+@RequiredArgsConstructor
 public class InstructorController {
 
 	@Autowired
 	InstructorRepository instructorRepository;
 
-	@Autowired
-	IInstructorService instructorService;
 
-	//  ****************************************************  GET  ****************************************************
+	private final InstructorService instructorService;
+
+    //  ****************************************************  GET  ****************************************************
 	@GetMapping("/get-all")
 	public ResponseEntity getAllInstructors() {
 		return ResponseEntity.status(200).body(instructorRepository.findAll());
@@ -35,9 +39,8 @@ public class InstructorController {
 
 	//  ***************************************************  POST  ****************************************************
 	@PostMapping("/add")
-	//@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity saveInstructor(@RequestBody Instructor instructor) {
-		instructorService.saveInstructor(instructor);
+	public ResponseEntity registerInstructor(@RequestBody InstructorDTO instructor) {
+		instructorService.registerInstructor(instructor); // Update the service to handle DTO
 		return ResponseEntity.status(201).body("Instructor added successfully");
 	}
 

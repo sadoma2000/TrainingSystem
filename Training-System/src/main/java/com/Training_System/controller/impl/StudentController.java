@@ -22,7 +22,7 @@ public class StudentController {
 	//  ****************************************************  GET  ****************************************************
 	@GetMapping("/get-all")
 	public ResponseEntity getAllStudents() {
-		return ResponseEntity.status(200).body(StudentService.getAllStudents());
+		return ResponseEntity.status(200).body(studentService.getAllStudents());
 	}
 
 	@GetMapping("/get-by-id/{id}")

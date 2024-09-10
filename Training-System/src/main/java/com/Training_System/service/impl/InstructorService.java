@@ -3,6 +3,7 @@ package com.Training_System.service.impl;
 import com.Training_System.model.DTO.InstructorDTO;
 import com.Training_System.model.User;
 import com.Training_System.repository.AuthRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,12 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 @Service
-public class InstructorService implements IInstructorService {
+@RequiredArgsConstructor
+public class InstructorService {
 
 	@Autowired
-	InstructorRepository instructorRepository;
-    @Autowired
-    private AuthRepository authRepository;
+	private InstructorRepository instructorRepository;
+
+    private final AuthRepository authRepository;
 
 
 	public void registerInstructor(InstructorDTO instructorDTO) {
@@ -45,7 +47,7 @@ public class InstructorService implements IInstructorService {
 
 	}
 
-	@Override
+	//@Override
 	public void updateInstructor(String Language_spoken, Long id) {
 		Optional<Instructor> instructorOptional = instructorRepository.findById(id);
 		if (instructorOptional.isEmpty())
@@ -56,7 +58,7 @@ public class InstructorService implements IInstructorService {
 		instructorRepository.save(ins);
 	}
 
-	@Override
+	//@Override
 	public void deleteInstructor(Long id) {
 		Optional<Instructor> instructorOptional = instructorRepository.findById(id);
 		if (instructorOptional.isEmpty())
