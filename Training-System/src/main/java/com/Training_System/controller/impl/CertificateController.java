@@ -38,11 +38,13 @@ public class CertificateController {
 	}
 
 	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add")
-	public ResponseEntity addCertificate(@RequestBody Certificate certificate) {
-		certificateService.addCertificate(certificate);
-		return ResponseEntity.status(201).body("Certificate added successfully");
-	}
+	
+	@PostMapping("/add/{studentId}")
+       //@ResponseStatus(HttpStatus.CREATED)
+        public ResponseEntity addCertificate(@PathVariable Long studentId, @RequestBody Certificate certificate) {
+              certificateService.addCertificate(studentId, certificate);
+              return ResponseEntity.status(201).body("Certificate added successfully");
+              }
 
 	//  ****************************************************  PUT  ****************************************************
 	@PutMapping("/update/{id}")
