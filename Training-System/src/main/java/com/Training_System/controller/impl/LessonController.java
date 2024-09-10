@@ -36,18 +36,21 @@ public class LessonController {
 	}
 
 	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add")
-	public ResponseEntity addLesson(@RequestBody Lesson lesson) {
-		lessonService.addLesson(lesson);
-		return ResponseEntity.status(201).body("Lesson added successfully");
-	}
+	
+	@PostMapping("/add/{instructorId}/{courseId}")
+        public ResponseEntity addLesson(@PathVariable Long instructorId, @PathVariable Long courseId, @RequestBody Lesson lesson) {
+               String result = lessonService.addLesson(instructorId, courseId, lesson);
+                return ResponseEntity.status(201).body(result);
+        }
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateLesson(@RequestBody Lesson lesson) {
-		lessonService.updateLesson(lesson);
-		return ResponseEntity.status(201).body("Lesson updated successfully");
-	}
+
+	@PutMapping("/update/{lessonId}")
+        public ResponseEntity updateLesson(@PathVariable Long lessonId, @RequestBody Lesson lesson) {
+               lesson.setId(lessonId); 
+               String result = lessonService.updateLesson(lesson);
+               return ResponseEntity.status(201).body(result);
+        }
 
 	//  **************************************************  DELETE  ***************************************************
 	@DeleteMapping("/delete/{id}")
