@@ -1,6 +1,7 @@
 package com.Training_System.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -35,6 +36,18 @@ public class Course {
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	private List<Lesson> lessonList;
+
+	@OneToMany(mappedBy = "certificate")
+	private List<Certificate> certificateList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "enrollment")
+	private List<Enrollment> enrollmentList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "progress")
+	private List<Progress> progressList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "review")
+	private List<Review> reviewList = new ArrayList<>();
 
 	private Integer NumberOfLessons=0;
 	private String courseLevel;

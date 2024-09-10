@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -29,29 +31,47 @@ public class ConfigSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and() //Authorization
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authenticationProvider(daoAuthenticationProvider())
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**").permitAll() //Allowed for ALL
-                //
-                //                                                //Example: "api/v1/customer/get-all",
-                //                                                            "api/v1/employee/get-all",
-                //                                                            "api/v1/account/get-all")
-                //                                                            .hasAuthority("ADMIN")
-                .requestMatchers().hasAuthority("ADMIN")
-                //STUDENT
-                .requestMatchers().hasAuthority("STUDENT")
-                //INSTRUCTOR
-                .requestMatchers().hasAuthority("INSTRUCTOR")
-                .and() //logout
-                .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
-                .deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true)
-                .and()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/v1/auth/**").permitAll() // Allowed for ALL
+                        .requestMatchers(
+                                "/api/certificates",
+                                "/api/enrollments/delete/{id}",
+                                "/api/enrollments/add/{studentId}/{courseId}",
+                                "/api/Course/get-all",
+                                "/api/certificates/get-by-student/{studentId}")
+                        .hasAuthority("Student")
+                        .requestMatchers(
+                                "/api/certificates/get-by-student/{studentId}",
+                                "/api/certificates/get-all",
+                                "/api/Course/get-all",
+                                "/api/Course/update/{id}",
+                                "/api/lessons/get-all",
+                                "/api/lessons/update/{lessonId}",
+                                "/api/reviews/get-all",
+                                "/api/students/get-all")
+                        .hasAuthority("Instructor")
+                        .requestMatchers(
+                                "/api/v1/Instructors/get-all",
+                                "/api/students/get-all",
+                                "/api/Course/get-all",
+                                "/api/lessons/get-all",
+                                "/api/progress/get-all",
+                                "/api/certificates/get-all",
+                                "/api/reviews/get-all",
+                                "/api/enrollments/get-all")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/api/v1/auth/logout")
+                        .logoutSuccessUrl("/")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                )
                 .httpBasic();
-
         return http.build();
     }
 }
