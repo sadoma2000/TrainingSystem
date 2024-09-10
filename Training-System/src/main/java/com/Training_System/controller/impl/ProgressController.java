@@ -40,18 +40,22 @@ public class ProgressController {
 	}
 
 	//  ***************************************************  POST  ****************************************************
+	
 	@PostMapping("/add")
-	public ResponseEntity addProgress(@RequestBody Progress progress) {
-		progressService.addProgress(progress);
-		return ResponseEntity.status(201).body("Progress added successfully");
-	}
+        public ResponseEntity addProgress(@RequestBody Progress progress) {
+               String result = progressService.addProgress(progress);
+               return ResponseEntity.status(201).body(result);
+        }
+
 
 	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateProgress(@RequestBody Progress progress, @PathVariable Long id) {
-		progressService.updateProgress(progress, id);
-		return ResponseEntity.status(201).body("Progress updated successfully");
-	}
+	
+      @PutMapping("/update/{id}")
+      public ResponseEntity updateProgress(@PathVariable Long id, @RequestBody Progress progress) {
+              progress.setId(id); 
+              String result = progressService.updateProgress(progress);
+              return ResponseEntity.status(200).body(result);
+       }
 
 	//  **************************************************  DELETE  ***************************************************
 	@DeleteMapping("/delete/{id}")
