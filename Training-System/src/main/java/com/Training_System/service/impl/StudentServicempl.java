@@ -47,8 +47,8 @@ public class StudentServicempl implements StudentService {
 		if (exist == null) {
 			throw new ApiException("No Student Exists!");
 		} else {
-			exist.setFirst_name(student.getFirst_name());
-			exist.setLast_name(student.getLast_name());
+			exist.setFirstName(student.getFirstName());
+			exist.setLastName(student.getLastName());
 			exist.setEmail(student.getEmail());
 			exist.setMajor(student.getMajor());
 			exist.setGender(student.getGender());

@@ -49,8 +49,8 @@ public class ProgressService implements IProgressService {
 	@Override
 	public String addProgress(Progress progress) { //redundant by acceptEnrollment
 		Progress newProgress = new Progress();
-		newProgress.setStudentId(progress.getStudentId());
-		newProgress.setCourseId(progress.getCourseId());
+		newProgress.setStudent(progress.getStudent());
+		newProgress.setCourse(progress.getCourse());
 		newProgress.setCompletedLessons(progress.getCompletedLessons());
 		newProgress.setRequiredLessons(progress.getRequiredLessons());
 
@@ -84,8 +84,8 @@ public class ProgressService implements IProgressService {
 		//Issue certificate
 		if (progress.getCompletedLessons() >= progress.getRequiredLessons()) {
 			Certificate certificate = new Certificate();
-			certificate.setStudentId(studentId); //EDIT
-			certificate.setCourseId(courseId); //EDIT
+			certificate.setStudent(student);
+			certificate.setCourse(course);
 			certificate.setCertificateTitle("Completion of "+course.getTopic());
 			certificate.setIssuedDate(LocalDate.now());
 			certificateRepository.save(certificate);

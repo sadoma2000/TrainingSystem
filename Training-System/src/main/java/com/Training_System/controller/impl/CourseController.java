@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Training_System.controller.interfaces.ICourseController;
 import com.Training_System.model.Course;
 import com.Training_System.repository.CourseRepository;
 import com.Training_System.service.interfaces.ICourseService;
 
 @RestController
 @RequestMapping("/api/Course")
-public class CourseController implements ICourseController{
+public class CourseController {
 
 	@Autowired
 	CourseRepository courseRepository;

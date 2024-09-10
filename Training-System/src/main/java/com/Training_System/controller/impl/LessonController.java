@@ -1,16 +1,12 @@
 package com.Training_System.controller.impl;
 
 
-import com.Training_System.model.Certificate;
-import com.Training_System.model.Enrollment;
+import com.Training_System.service.impl.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.Training_System.model.Lesson;
-import com.Training_System.service.interfaces.LessonService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/lessons")

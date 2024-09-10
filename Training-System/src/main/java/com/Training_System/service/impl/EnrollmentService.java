@@ -80,8 +80,8 @@ public class EnrollmentService implements IEnrollmentService{
 		//create progress automatically when accepted
 		Progress progress= new Progress();
 
-		progress.setStudentId(enrollment.getStudent().getId()); //change
-		progress.setCourseId(enrollment.getCourse().getId()); //change
+		progress.setStudent(enrollment.getStudent());
+		progress.setCourse(enrollment.getCourse());
 
 		progress.setCompletedLessons(0);
 		progress.setRequiredLessons(course.getNumberOfLessons());
