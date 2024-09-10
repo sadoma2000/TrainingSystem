@@ -46,7 +46,18 @@ public class EnrollmentController {
 	}
 
 	//ADD REJECT CONTROLLER
+	@PatchMapping("/reject/{instructorId}/{enrollmentId}")
+	public ResponseEntity rejectEnrollment(@PathVariable Long instructorId, @PathVariable Long enrollmentId) {
+		enrollmentService.rejectEnrollment(instructorId,enrollmentId);
+		return ResponseEntity.status(201).body("Enrollment rejected successfully");
+	}
 
+	//ACCEPT CONTROLLER
+	@PatchMapping("/accept/{instructorId}/{enrollmentId}")
+	public ResponseEntity acceptEnrollment(@PathVariable Long instructorId, @PathVariable Long enrollmentId,@RequestBody Enrollment enrollment) {
+		enrollmentService.acceptEnrollment(instructorId , enrollmentId);
+		return ResponseEntity.status(201).body("Enrollment accepted successfully");
+	}
 	//  **************************************************  DELETE  ***************************************************
 	//Delete an enrolment by ID
 	@DeleteMapping("/delete/{id}")
