@@ -1,5 +1,9 @@
 package com.Training_System.service.impl;
 
+import com.Training_System.model.DTO.InstructorDTO;
+import com.Training_System.model.User;
+import com.Training_System.repository.AuthRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,17 +21,28 @@ public class InstructorService implements IInstructorService {
 
 	@Autowired
 	InstructorRepository instructorRepository;
+    @Autowired
+    private AuthRepository authRepository;
 
-	@Override
-	public void saveInstructor(Instructor instructor) {
-		Instructor newInstructor = new Instructor();
-		newInstructor.setFirstName(instructor.getFirstName());
-		newInstructor.setLastName(instructor.getLastName());
-		newInstructor.setDepartment(instructor.getDepartment());
-		newInstructor.setLanguageSpoken(instructor.getLanguageSpoken());
-		newInstructor.setGender(instructor.getGender());
 
-		instructorRepository.save(newInstructor);
+	public void registerInstructor(InstructorDTO instructorDTO) {
+		String hash = new BCryptPasswordEncoder().encode(instructorDTO.getPassword());
+
+		User user = new User();
+		user.setUsername(instructorDTO.getUsername());
+		user.setPassword(hash);
+		user.setFirstName(instructorDTO.getFirstName());
+		user.setLastName(instructorDTO.getLastName());
+		user.setGender(instructorDTO.getGender());
+		user.setRole("INSTRUCTOR");
+		authRepository.save(user);
+
+		Instructor instructor = new Instructor();
+		instructor.setDepartment(instructorDTO.getDepartment());
+		instructor.setLanguageSpoken(instructorDTO.getLanguageSpoken());
+		instructor.setUser(user);
+		instructorRepository.save(instructor);
+
 	}
 
 	@Override
