@@ -21,7 +21,7 @@ public class CertificateController {
 	@Autowired
 	private CertificateService certificateService;
 
-	//  ****************************************************  GET  ****************************************************
+	// **************************************************** GET ****************************************************
 	@GetMapping("/get-all")
 	public ResponseEntity getAllCertificates() {
 		return ResponseEntity.status(200).body(certificateService.getAllCertificates());
@@ -37,26 +37,24 @@ public class CertificateController {
 		return ResponseEntity.status(200).body(certificateService.getCertificateById(id));
 	}
 
-	//  ***************************************************  POST  ****************************************************
-	
+	// *************************************************** POST ****************************************************
 	@PostMapping("/add/{studentId}")
-       //@ResponseStatus(HttpStatus.CREATED)
-        public ResponseEntity addCertificate(@PathVariable Long studentId, @RequestBody Certificate certificate) {
-              certificateService.addCertificate(studentId, certificate);
-              return ResponseEntity.status(201).body("Certificate added successfully");
-              }
-
-	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateCertificate(@RequestBody Certificate certificate, @PathVariable Long id) {
-                certificateService.updateCertificate(certificate, id); 
-		return ResponseEntity.status(201).body("Certificate updated successfully");
+	public ResponseEntity addCertificate(@RequestBody Certificate certificate, @PathVariable Long studentId) {
+		String result = certificateService.addCertificate(certificate, studentId);
+		return ResponseEntity.status(201).body(result);
 	}
 
-	//  **************************************************  DELETE  ***************************************************
+	// **************************************************** PUT ****************************************************
+	@PutMapping("/update/{id}")
+	public ResponseEntity updateCertificate(@RequestBody Certificate certificate, @PathVariable Long id) {
+		String result = certificateService.updateCertificate(certificate, id);
+		return ResponseEntity.status(200).body(result);
+	}
+
+	// ************************************************** DELETE ***************************************************
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity deleteCertificate(@PathVariable Long id) {
 		certificateService.deleteCertificate(id);
-		return ResponseEntity.status(201).body("Certificate deleted successfully");
+		return ResponseEntity.status(200).body("Certificate deleted successfully");
 	}
 }

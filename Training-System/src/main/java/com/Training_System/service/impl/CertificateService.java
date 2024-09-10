@@ -1,5 +1,7 @@
 package com.Training_System.service.impl;
 
+import com.Training_System.model.Student;
+import com.Training_System.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,6 +21,9 @@ public class CertificateService implements ICertificateService {
 	@Autowired
 	private CertificateRepository certificateRepository;
 
+	@Autowired
+	private StudentRepository studentRepository;
+
 	@Override
 	public List<Certificate> getAllCertificates() {
 		return certificateRepository.findAll();
@@ -36,21 +41,26 @@ public class CertificateService implements ICertificateService {
 	}
 
 	@Override
-	public String addCertificate(Certificate certificate) {
+	public String addCertificate(Certificate certificate, Long studentId) {
+		Optional<Student> studentOptional = studentRepository.findById(studentId);
+		if (studentOptional.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student " + studentId + " not found");
+		}
+		certificate.setStudent(studentOptional.get());
 		certificateRepository.save(certificate);
 		return "Certificate added successfully";
 	}
 
 	@Override
-	public String updateCertificate(Certificate certificate,Long id) {
-		Optional<Certificate> existingCertificateOptional = certificateRepository.findById(certificate.getId());
+	public String updateCertificate(Certificate certificate, Long id) {
+		Optional<Certificate> existingCertificateOptional = certificateRepository.findById(id);
 		if (existingCertificateOptional.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + certificate.getId() + " not found");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found");
 		}
 
 		Certificate existingCertificate = existingCertificateOptional.get();
-		existingCertificate.setStudentId(certificate.getStudentId());
-		existingCertificate.setCourseId(certificate.getCourseId());
+		existingCertificate.setStudent(certificate.getStudent());
+		existingCertificate.setCourse(certificate.getCourse());
 		existingCertificate.setIssuedDate(certificate.getIssuedDate());
 		existingCertificate.setCertificateTitle(certificate.getCertificateTitle());
 
