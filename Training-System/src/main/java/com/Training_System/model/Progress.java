@@ -24,6 +24,8 @@ public class Progress {
 	@JoinColumn(name = "course_id")
 	private Course course;
 
+	@Column(columnDefinition = "INT NOT NULL")
 	private int completedLessons;
+	@Column(columnDefinition = "INT NOT NULL")
 	private int requiredLessons;
 }

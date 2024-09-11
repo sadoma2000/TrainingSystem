@@ -25,15 +25,24 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "VARCHAR(10) NOT NULL UNIQUE")
     private String username;
+
+    @Column(columnDefinition = "VARCHAR(300) NOT NULL")
     private String password;
 
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String firstName;
+
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String lastName;
+
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String gender;
 
 
 
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String role;
 
 

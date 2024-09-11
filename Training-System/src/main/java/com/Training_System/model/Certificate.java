@@ -27,9 +27,9 @@ public class Certificate {
 	@JoinColumn(name = "course_id")
 	private Course course;
 
-	@Column(name = "issued_date")
+	@Column(columnDefinition = "DATE NOT NULL")
 	private LocalDate issuedDate;
 
-	@Column(name = "certificate_title")
+	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
 	private String certificateTitle;
 }

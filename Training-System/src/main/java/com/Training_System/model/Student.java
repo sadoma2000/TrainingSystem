@@ -19,6 +19,7 @@ public class Student {
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
 	private String major;
 
 	@OneToOne

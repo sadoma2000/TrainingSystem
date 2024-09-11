@@ -19,7 +19,10 @@ public class Instructor {
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
 	private String department;
+
+	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
 	private String languageSpoken;  
 
 
