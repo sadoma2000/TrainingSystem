@@ -42,7 +42,7 @@ public class ConfigSecurity {
                                 "/api/enrollments/add/{studentId}/{courseId}",
                                 "/api/Course/get-all",
                                 "/api/certificates/get-by-student/{studentId}")
-                        .hasAuthority("Student")
+                        .hasAuthority("STUDENT")
                         .requestMatchers(
                                 "/api/certificates/get-by-student/{studentId}",
                                 "/api/certificates/get-all",
@@ -52,7 +52,7 @@ public class ConfigSecurity {
                                 "/api/lessons/update/{lessonId}",
                                 "/api/reviews/get-all",
                                 "/api/students/get-all")
-                        .hasAuthority("Instructor")
+                        .hasAuthority("INSTRUCTOR")
                         .requestMatchers(
                                 "/api/Instructors/get-all",
                                 "/api/students/get-all",
@@ -63,7 +63,7 @@ public class ConfigSecurity {
                                 "/api/reviews/get-all",
                                 "/api/enrollments/get-all")
                         .hasAuthority("ADMIN")
-                        .requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
+                        //.requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/v1/auth/logout")
