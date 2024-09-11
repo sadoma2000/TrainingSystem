@@ -31,22 +31,22 @@ public class Course {
 	private Timestamp endDate;
 
 	@ManyToOne
-	@JoinColumn(name = "instructor_id", referencedColumnName = "id")
-	private Instructor instructor;  // Foreign key reference to Instructor
+	@JoinColumn(name = "instructor_id")
+	private Instructor instructor;
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	private List<Lesson> lessonList;
 
-	@OneToMany(mappedBy = "certificate")
+	@OneToMany(mappedBy = "course")
 	private List<Certificate> certificateList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "enrollment")
+	@OneToMany(mappedBy = "course")
 	private List<Enrollment> enrollmentList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "progress")
+	@OneToMany(mappedBy = "course")
 	private List<Progress> progressList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "review")
+	@OneToMany(mappedBy = "course")
 	private List<Review> reviewList = new ArrayList<>();
 
 	private Integer NumberOfLessons=0;

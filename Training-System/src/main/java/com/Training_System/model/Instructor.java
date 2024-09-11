@@ -28,5 +28,5 @@ public class Instructor {
 
 	@OneToOne
 	@MapsId
-	private User user;
+	private AppUser user;
 }

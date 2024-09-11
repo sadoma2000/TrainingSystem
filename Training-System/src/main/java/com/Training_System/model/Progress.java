@@ -17,11 +17,11 @@ public class Progress {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "student_id", referencedColumnName = "id")
+	@JoinColumn(name = "student_id")
 	private Student student;
 
 	@ManyToOne
-	@JoinColumn(name = "course_id", referencedColumnName = "id")
+	@JoinColumn(name = "course_id")
 	private Course course;
 
 	private int completedLessons;

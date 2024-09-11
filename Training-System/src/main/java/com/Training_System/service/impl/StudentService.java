@@ -3,8 +3,8 @@ package com.Training_System.service.impl;
 
 
 import com.Training_System.Api.ApiException;
+import com.Training_System.model.AppUser;
 import com.Training_System.model.DTO.StudentDTO;
-import com.Training_System.model.User;
 import com.Training_System.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.Training_System.model.Student;
 import com.Training_System.repository.StudentRepository;
-import com.Training_System.service.interfaces.IStudentService;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class StudentService  {
 	public void registerStudent(StudentDTO studentDTO) {
 		String hash = new BCryptPasswordEncoder().encode(studentDTO.getPassword());
 
-		User user = new User();
+		AppUser user = new AppUser();
 		user.setUsername(studentDTO.getUsername());
 		user.setPassword(hash);
 		user.setFirstName(studentDTO.getFirstName());

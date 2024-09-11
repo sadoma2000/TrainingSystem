@@ -1,7 +1,7 @@
 package com.Training_System.service.impl;
 
 import com.Training_System.model.DTO.InstructorDTO;
-import com.Training_System.model.User;
+import com.Training_System.model.AppUser;
 import com.Training_System.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,7 +30,7 @@ public class InstructorService {
 	public void registerInstructor(InstructorDTO instructorDTO) {
 		String hash = new BCryptPasswordEncoder().encode(instructorDTO.getPassword());
 
-		User user = new User();
+		AppUser user = new AppUser();
 		user.setUsername(instructorDTO.getUsername());
 		user.setPassword(hash);
 		user.setFirstName(instructorDTO.getFirstName());

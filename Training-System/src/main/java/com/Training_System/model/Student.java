@@ -23,17 +23,17 @@ public class Student {
 
 	@OneToOne
 	@MapsId
-	private User user;
+	private AppUser user;
 
-	@OneToMany(mappedBy = "certificate")
+	@OneToMany(mappedBy = "student")
 	private List<Certificate> certificateList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "enrollment")
+	@OneToMany(mappedBy = "student")
 	private List<Enrollment> enrollmentList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "progress")
+	@OneToMany(mappedBy = "student")
 	private List<Progress> progressList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "review")
+	@OneToMany(mappedBy = "student")
 	private List<Review> reviewList = new ArrayList<>();
 }

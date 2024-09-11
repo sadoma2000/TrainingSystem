@@ -22,7 +22,7 @@ public class Lesson {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "course_id", referencedColumnName = "id")
+	@JoinColumn(name = "course_id")
 	private Course course;
 
 	private String Title;

@@ -19,7 +19,7 @@ import java.util.Collections;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails {
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,12 +38,12 @@ public class User implements UserDetails {
 
 
     //RELATIONS (ADD TO THE OTHER TWO CLASSES)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne( mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Student student;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Instructor instructor;

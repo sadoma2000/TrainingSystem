@@ -1,6 +1,6 @@
 package com.Training_System.service.impl;
 
-import com.Training_System.model.User;
+import com.Training_System.model.AppUser;
 import com.Training_System.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = authRepository.findByUsername(username);
+        AppUser user = authRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
