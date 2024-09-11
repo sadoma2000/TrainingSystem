@@ -36,7 +36,7 @@ public class ConfigSecurity {
                 .and() //Authorization
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                        .requestMatchers("/api/auth/**").permitAll() // Allowed for ALL
+                        .requestMatchers("/api/students/register").permitAll() // Allowed for ALL
                         .requestMatchers(
                                 "/api/certificates",
                                 "/api/enrollments/delete/{id}",

@@ -38,7 +38,7 @@ public class InstructorController {
 	}
 
 	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add")
+	@PostMapping("/register")
 	public ResponseEntity registerInstructor(@RequestBody InstructorDTO instructor) {
 		instructorService.registerInstructor(instructor); // Update the service to handle DTO
 		return ResponseEntity.status(201).body("Instructor added successfully");
