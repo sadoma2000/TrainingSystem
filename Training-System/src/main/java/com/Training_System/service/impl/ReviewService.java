@@ -17,51 +17,51 @@ import org.springframework.http.HttpStatus;
 @Service
 public class ReviewService implements IReviewService {
 
-	@Autowired
-	ReviewRepository reviewRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
 
-	@Override
-	public List<Review> getAllReviews() {
-		return reviewRepository.findAll();
-	}
+    @Override
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
+    }
 
-	@Override
-	public Review getReviewById(Long id) {
-		return reviewRepository.findById(id)
-				.orElseThrow(() -> new ApiException("Review not found with id " + id));
-	}
+    @Override
+    public Review getReviewById(Long id) {
+        return reviewRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Review not found with id " + id));
+    }
 
-	@Override
-	public void saveReview(Review review) {
-		reviewRepository.save(review);
-	}
+    @Override
+    public void saveReview(Review review) {
+        reviewRepository.save(review);
+    }
 
-	@Override
-	public void updateReview(String reviewText, Long id) {
-		Optional<Review> reviewOptional = reviewRepository.findById(id);
-		if (reviewOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review " + id + " not found");
+    @Override
+    public void updateReview(String reviewText, Long id) {
+        Optional<Review> reviewOptional = reviewRepository.findById(id);
+        if (reviewOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review " + id + " not found");
 
-		Review review = reviewOptional.get();
-		review.setReviewText(reviewText);
-		reviewRepository.save(review);
-	}
+        Review review = reviewOptional.get();
+        review.setReviewText(reviewText);
+        reviewRepository.save(review);
+    }
 
-	@Override
-	public void deleteReview(Long id) {
-		Optional<Review> reviewOptional = reviewRepository.findById(id);
-		if (reviewOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review " + id + " not found");
-		reviewRepository.deleteById(id);
-	}
+    @Override
+    public void deleteReview(Long id) {
+        Optional<Review> reviewOptional = reviewRepository.findById(id);
+        if (reviewOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review " + id + " not found");
+        reviewRepository.deleteById(id);
+    }
 
-	@Override
-	public List<Review> getReviewsByCourseId(Long courseId) {
-		return reviewRepository.findByCourseId(courseId);
-	}
+    @Override
+    public List<Review> getReviewsByCourseId(Long courseId) {
+        return reviewRepository.findByCourseId(courseId);
+    }
 
-	@Override
-	public List<Review> getReviewsByStudentId(Long studentId) {
-		return reviewRepository.findByStudentId(studentId);
-	}
+    @Override
+    public List<Review> getReviewsByStudentId(Long studentId) {
+        return reviewRepository.findByStudentId(studentId);
+    }
 }

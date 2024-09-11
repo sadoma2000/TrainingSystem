@@ -21,48 +21,48 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public class InstructorService {
 
-	@Autowired
-	private InstructorRepository instructorRepository;
+    @Autowired
+    private InstructorRepository instructorRepository;
 
     private final AuthRepository authRepository;
 
 
-	public void registerInstructor(InstructorDTO instructorDTO) {
-		String hash = new BCryptPasswordEncoder().encode(instructorDTO.getPassword());
+    public void registerInstructor(InstructorDTO instructorDTO) {
+        String hash = new BCryptPasswordEncoder().encode(instructorDTO.getPassword());
 
-		AppUser user = new AppUser();
-		user.setUsername(instructorDTO.getUsername());
-		user.setPassword(hash);
-		user.setFirstName(instructorDTO.getFirstName());
-		user.setLastName(instructorDTO.getLastName());
-		user.setGender(instructorDTO.getGender());
-		user.setRole("INSTRUCTOR");
-		authRepository.save(user);
+        AppUser user = new AppUser();
+        user.setUsername(instructorDTO.getUsername());
+        user.setPassword(hash);
+        user.setFirstName(instructorDTO.getFirstName());
+        user.setLastName(instructorDTO.getLastName());
+        user.setGender(instructorDTO.getGender());
+        user.setRole("INSTRUCTOR");
+        authRepository.save(user);
 
-		Instructor instructor = new Instructor();
-		instructor.setDepartment(instructorDTO.getDepartment());
-		instructor.setLanguageSpoken(instructorDTO.getLanguageSpoken());
-		instructor.setUser(user);
-		instructorRepository.save(instructor);
+        Instructor instructor = new Instructor();
+        instructor.setDepartment(instructorDTO.getDepartment());
+        instructor.setLanguageSpoken(instructorDTO.getLanguageSpoken());
+        instructor.setUser(user);
+        instructorRepository.save(instructor);
 
-	}
+    }
 
-	//@Override
-	public void updateInstructor(String Language_spoken, Long id) {
-		Optional<Instructor> instructorOptional = instructorRepository.findById(id);
-		if (instructorOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor " + id + " not found");
+    //@Override
+    public void updateInstructor(String Language_spoken, Long id) {
+        Optional<Instructor> instructorOptional = instructorRepository.findById(id);
+        if (instructorOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor " + id + " not found");
 
-		Instructor ins = instructorOptional.get();
-		ins.setLanguageSpoken(Language_spoken);
-		instructorRepository.save(ins);
-	}
+        Instructor ins = instructorOptional.get();
+        ins.setLanguageSpoken(Language_spoken);
+        instructorRepository.save(ins);
+    }
 
-	//@Override
-	public void deleteInstructor(Long id) {
-		Optional<Instructor> instructorOptional = instructorRepository.findById(id);
-		if (instructorOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor " + id + " not found");
-		instructorRepository.deleteById(id);
-	}
+    //@Override
+    public void deleteInstructor(Long id) {
+        Optional<Instructor> instructorOptional = instructorRepository.findById(id);
+        if (instructorOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor " + id + " not found");
+        instructorRepository.deleteById(id);
+    }
 }

@@ -19,94 +19,94 @@ import com.Training_System.service.interfaces.IEnrollmentService;
 
 @Service
 @RequiredArgsConstructor
-public class EnrollmentService implements IEnrollmentService{
+public class EnrollmentService implements IEnrollmentService {
 
-	@Autowired
-	private EnrollmentRepository enrollmentRepository;
+    @Autowired
+    private EnrollmentRepository enrollmentRepository;
 
-	private final CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private ProgressRepository progressRepository;
 
-	@Override
-	public List<Enrollment> getAllEnrollments() {
-		return enrollmentRepository.findAll();
-	}
+    @Override
+    public List<Enrollment> getAllEnrollments() {
+        return enrollmentRepository.findAll();
+    }
 
-	@Override
-	public Enrollment getEnrollmentById(Long id) {
-		return enrollmentRepository.findById(id).orElse(null);
-	}
+    @Override
+    public Enrollment getEnrollmentById(Long id) {
+        return enrollmentRepository.findById(id).orElse(null);
+    }
 
-	//@Override
-	public Enrollment createEnrollment(Long studentId, Long courseId) {
-		Course course = courseRepository.findCourseById(courseId);
-		if (course == null) {
-			throw new ApiException("Course not found");
-		}
-		Enrollment newEnrollment = new Enrollment();
-		newEnrollment.setCourse(course);
-		newEnrollment.setStudent(studentRepository.findStudentById(studentId));
-		return enrollmentRepository.save(newEnrollment);
-	}
+    //@Override
+    public Enrollment createEnrollment(Long studentId, Long courseId) {
+        Course course = courseRepository.findCourseById(courseId);
+        if (course == null) {
+            throw new ApiException("Course not found");
+        }
+        Enrollment newEnrollment = new Enrollment();
+        newEnrollment.setCourse(course);
+        newEnrollment.setStudent(studentRepository.findStudentById(studentId));
+        return enrollmentRepository.save(newEnrollment);
+    }
 
-	@Override
-	public Enrollment updateEnrollment(Long id, Enrollment enrollment) {
-		Optional<Enrollment> existingEnrollment = enrollmentRepository.findById(id);
-		if (existingEnrollment.isPresent()) {
-			Enrollment updatedEnrollment = existingEnrollment.get();
-			updatedEnrollment.setState(enrollment.getState());
-			updatedEnrollment.setStudent(enrollment.getStudent());
-			updatedEnrollment.setCourse(enrollment.getCourse());
-			return enrollmentRepository.save(updatedEnrollment);
-		}
-		return null;
-	}
+    @Override
+    public Enrollment updateEnrollment(Long id, Enrollment enrollment) {
+        Optional<Enrollment> existingEnrollment = enrollmentRepository.findById(id);
+        if (existingEnrollment.isPresent()) {
+            Enrollment updatedEnrollment = existingEnrollment.get();
+            updatedEnrollment.setState(enrollment.getState());
+            updatedEnrollment.setStudent(enrollment.getStudent());
+            updatedEnrollment.setCourse(enrollment.getCourse());
+            return enrollmentRepository.save(updatedEnrollment);
+        }
+        return null;
+    }
 
-	public void acceptEnrollment(Long instructorId, Long enrollmentId) { //edit to accommodate with relations
-		Enrollment enrollment = enrollmentRepository.findEnrollmentById(enrollmentId);
-		Course course = courseRepository.findCourseById(enrollment.getCourse().getId());
-		if (!course.getInstructor().getId().equals(instructorId)) {
-			throw new ApiException("Course is not owned by the instructor");
-		}
-		if (!enrollment.getState().equalsIgnoreCase("pending")){
-			throw new ApiException("Only pending enrollments can be accepted");
-		}
-		enrollment.setState("Accepted");
-		enrollmentRepository.save(enrollment);
+    public void acceptEnrollment(Long instructorId, Long enrollmentId) { //edit to accommodate with relations
+        Enrollment enrollment = enrollmentRepository.findEnrollmentById(enrollmentId);
+        Course course = courseRepository.findCourseById(enrollment.getCourse().getId());
+        if (!course.getInstructor().getId().equals(instructorId)) {
+            throw new ApiException("Course is not owned by the instructor");
+        }
+        if (!enrollment.getState().equalsIgnoreCase("pending")) {
+            throw new ApiException("Only pending enrollments can be accepted");
+        }
+        enrollment.setState("Accepted");
+        enrollmentRepository.save(enrollment);
 
-		//create progress automatically when accepted
-		Progress progress= new Progress();
+        //create progress automatically when accepted
+        Progress progress = new Progress();
 
-		progress.setStudent(enrollment.getStudent());
-		progress.setCourse(enrollment.getCourse());
+        progress.setStudent(enrollment.getStudent());
+        progress.setCourse(enrollment.getCourse());
 
-		progress.setCompletedLessons(0);
-		progress.setRequiredLessons(course.getNumberOfLessons());
+        progress.setCompletedLessons(0);
+        progress.setRequiredLessons(course.getNumberOfLessons());
 
-		progressRepository.save(progress);
-	}
+        progressRepository.save(progress);
+    }
 
-	public void rejectEnrollment(Long instructorId, Long enrollmentId) { //add controller
-		Enrollment enrollment = enrollmentRepository.findEnrollmentById(enrollmentId);
-		Course course = courseRepository.findCourseById(enrollment.getCourse().getId());
+    public void rejectEnrollment(Long instructorId, Long enrollmentId) { //add controller
+        Enrollment enrollment = enrollmentRepository.findEnrollmentById(enrollmentId);
+        Course course = courseRepository.findCourseById(enrollment.getCourse().getId());
 
-		if (!course.getInstructor().getId().equals(instructorId)) {
-			throw new ApiException("Course is not owned by the instructor");
-		}
-		if (!enrollment.getState().equalsIgnoreCase("pending")){
-			throw new ApiException("Only pending enrollments can be rejected");
-		}
-		enrollment.setState("Rejected");
-		enrollmentRepository.save(enrollment);
-	}
+        if (!course.getInstructor().getId().equals(instructorId)) {
+            throw new ApiException("Course is not owned by the instructor");
+        }
+        if (!enrollment.getState().equalsIgnoreCase("pending")) {
+            throw new ApiException("Only pending enrollments can be rejected");
+        }
+        enrollment.setState("Rejected");
+        enrollmentRepository.save(enrollment);
+    }
 
-	@Override
-	public void deleteEnrollment(Long id) {
-		enrollmentRepository.deleteById(id);
-	}
+    @Override
+    public void deleteEnrollment(Long id) {
+        enrollmentRepository.deleteById(id);
+    }
 
 
 }

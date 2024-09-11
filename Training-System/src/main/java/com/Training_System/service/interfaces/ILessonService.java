@@ -7,10 +7,13 @@ import com.Training_System.model.Lesson;
 
 public interface ILessonService {
 
-	List<Lesson> getAllLessons();
-	List<Lesson> getLessonsByCourseId(Long courseId);
-	Lesson getLessonById(Long id);
-	//String addLesson(Lesson lesson);
-	String updateLesson(Lesson lesson);
-	void deleteLesson(Long id);
+    List<Lesson> getAllLessons();
+
+    List<Lesson> getLessonsByCourseId(Long courseId);
+
+    Lesson getLessonById(Long id);
+
+    String updateLesson(Lesson lesson);
+
+    void deleteLesson(Long id);
 }

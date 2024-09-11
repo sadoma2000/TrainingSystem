@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.Training_System.model.Enrollment;
 
 @Repository
-public interface EnrollmentRepository extends JpaRepository<Enrollment, Long>{
+public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     Enrollment findEnrollmentById(long id);
 
 }

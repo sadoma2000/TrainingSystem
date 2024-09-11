@@ -8,9 +8,10 @@ import com.Training_System.model.Progress;
 
 @Repository
 public interface ProgressRepository extends JpaRepository<Progress, Long> {
-	Progress findProgressById(long id);
-	List<Progress> findByStudentId(Long studentId);
+    Progress findProgressById(long id);
 
-	Progress findProgressByStudentIdAndCourseId(Long studentId, Long courseId);
+    List<Progress> findByStudentId(Long studentId);
+
+    Progress findProgressByStudentIdAndCourseId(Long studentId, Long courseId);
 
 }

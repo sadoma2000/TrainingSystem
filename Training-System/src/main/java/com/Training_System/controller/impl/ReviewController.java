@@ -20,50 +20,50 @@ import com.Training_System.service.impl.ReviewService;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
-	@Autowired
-	private ReviewService reviewService;
+    @Autowired
+    private ReviewService reviewService;
 
-	//  ****************************************************  GET  ****************************************************
-	@GetMapping("/get-all")
-	public ResponseEntity getAllReviews() {
-		return ResponseEntity.status(200).body(reviewService.getAllReviews());
-	}
+    //  ****************************************************  GET  ****************************************************
+    @GetMapping("/get-all")
+    public ResponseEntity getAllReviews() {
+        return ResponseEntity.status(200).body(reviewService.getAllReviews());
+    }
 
-	@GetMapping("/get-by-Review/{courseId}")
-	public ResponseEntity getReviewsByCourseId(@PathVariable Long courseId) {
-		return ResponseEntity.status(200).body(reviewService.getReviewsByCourseId(courseId));
-	}
+    @GetMapping("/get-by-Review/{courseId}")
+    public ResponseEntity getReviewsByCourseId(@PathVariable Long courseId) {
+        return ResponseEntity.status(200).body(reviewService.getReviewsByCourseId(courseId));
+    }
 
-	@GetMapping("/get-by-Review/{studentId}")
-	public ResponseEntity getReviewsByStudentId(@PathVariable Long studentId) {
-		return ResponseEntity.status(200).body(reviewService.getReviewsByStudentId(studentId));
-	}
+    @GetMapping("/get-by-Review/{studentId}")
+    public ResponseEntity getReviewsByStudentId(@PathVariable Long studentId) {
+        return ResponseEntity.status(200).body(reviewService.getReviewsByStudentId(studentId));
+    }
 
-	@GetMapping("/get-by-id/{id}")
-	public ResponseEntity getReviewById(@PathVariable Long id) {
-		return ResponseEntity.status(200).body(reviewService.getReviewById(id));
-	}
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity getReviewById(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(reviewService.getReviewById(id));
+    }
 
-	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add")
-	public ResponseEntity addReview(@RequestBody Review review) {
-		reviewService.saveReview(review);
-		return ResponseEntity.status(201).body("Review added successfully");
-	}
+    //  ***************************************************  POST  ****************************************************
+    @PostMapping("/add")
+    public ResponseEntity addReview(@RequestBody Review review) {
+        reviewService.saveReview(review);
+        return ResponseEntity.status(201).body("Review added successfully");
+    }
 
-	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateReview( @RequestBody String reviewText,@PathVariable Long id) {
-		reviewService.updateReview(reviewText,id);
-		return ResponseEntity.status(201).body("Review updated successfully");
-	}
+    //  ****************************************************  PUT  ****************************************************
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateReview(@RequestBody String reviewText, @PathVariable Long id) {
+        reviewService.updateReview(reviewText, id);
+        return ResponseEntity.status(201).body("Review updated successfully");
+    }
 
-	//  **************************************************  DELETE  ***************************************************
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity deleteReview(@PathVariable Long id) {
-		reviewService.deleteReview(id);
-		return ResponseEntity.status(201).body("Review deleted successfully");
-	}
+    //  **************************************************  DELETE  ***************************************************
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteReview(@PathVariable Long id) {
+        reviewService.deleteReview(id);
+        return ResponseEntity.status(201).body("Review deleted successfully");
+    }
 
 }
 

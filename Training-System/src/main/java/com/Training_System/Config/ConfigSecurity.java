@@ -36,35 +36,37 @@ public class ConfigSecurity {
                 .and() //Authorization
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                        .requestMatchers("/api/students/register").permitAll() // Allowed for ALL
-                        .requestMatchers(
-                                "/api/certificates",
-                                "/api/enrollments/delete/{id}",
-                                "/api/enrollments/add/{studentId}/{courseId}",
-                                "/api/Course/get-all",
-                                "/api/certificates/get-by-student/{studentId}")
-                        .hasAuthority("STUDENT")
-                        .requestMatchers(
-                                "/api/certificates/get-by-student/{studentId}",
-                                "/api/certificates/get-all",
-                                "/api/Course/get-all",
-                                "/api/Course/update/{id}",
-                                "/api/lessons/get-all",
-                                "/api/lessons/update/{lessonId}",
-                                "/api/reviews/get-all",
-                                "/api/students/get-all")
-                        .hasAuthority("INSTRUCTOR")
-                        .requestMatchers(
-                                "/api/Instructors/get-all",
-                                "/api/students/get-all",
-                                "/api/Course/get-all",
-                                "/api/lessons/get-all",
-                                "/api/progress/get-all",
-                                "/api/certificates/get-all",
-                                "/api/reviews/get-all",
-                                "/api/enrollments/get-all")
-                        .hasAuthority("ADMIN")
-                        //.requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
+                .requestMatchers("/api/students/register",
+                        "/api/Instructors/register",
+                        "/api/admin/register-admin").permitAll() // Allowed for ALL
+                .requestMatchers(
+                        "/api/certificates",
+                        "/api/enrollments/delete/{id}",
+                        "/api/enrollments/add/{studentId}/{courseId}",
+                        "/api/Course/get-all",
+                        "/api/certificates/get-by-student/{studentId}")
+                .hasAuthority("STUDENT")
+                .requestMatchers(
+                        "/api/certificates/get-by-student/{studentId}",
+                        "/api/Course/update/{id}",
+                        "/api/lessons/update/{lessonId}"
+                )
+                .hasAuthority("INSTRUCTOR")
+                .requestMatchers(
+                        "/api/Instructors/get-all",
+                        "/api/progress/get-all",
+                        "/api/enrollments/get-all")
+                .hasAuthority("ADMIN")
+
+                .requestMatchers(
+                        "/api/students/get-all",
+                        "/api/Course/get-all",
+                        "/api/lessons/get-all",
+                        "/api/certificates/get-all",
+                        "/api/reviews/get-all")
+                .hasAnyAuthority("ADMIN", "INSTRUCTOR")
+
+                //.requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
                 .and() //logout
                 .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")

@@ -131,6 +131,7 @@ public class ControllerAdvice {
         String message = e.getMessage();
         return ResponseEntity.status(e.getStatusCode()).body(message);
     }
+
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
         String message = e.getMessage();

@@ -10,7 +10,8 @@ import com.Training_System.model.Certificate;
 @Repository
 public interface CertificateRepository extends JpaRepository<Certificate, Long> {
 
-	Certificate findCertificateById(long id);
-	List<Certificate> findByStudentId(Long studentId);
+    Certificate findCertificateById(long id);
+
+    List<Certificate> findByStudentId(Long studentId);
 
 }

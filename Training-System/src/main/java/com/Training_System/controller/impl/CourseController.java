@@ -21,39 +21,39 @@ import com.Training_System.service.interfaces.ICourseService;
 @RequestMapping("/api/Course")
 public class CourseController {
 
-	@Autowired
-	CourseRepository courseRepository;
+    @Autowired
+    CourseRepository courseRepository;
 
-	@Autowired
-	ICourseService courseService;
+    @Autowired
+    ICourseService courseService;
 
-	//  ****************************************************  GET  ****************************************************
-	//@Override
-	@GetMapping("/get-all")
-	public ResponseEntity getAllCourses() {
-		return ResponseEntity.status(200).body(courseRepository.findAll());
-	}
+    //  ****************************************************  GET  ****************************************************
+    //@Override
+    @GetMapping("/get-all")
+    public ResponseEntity getAllCourses() {
+        return ResponseEntity.status(200).body(courseRepository.findAll());
+    }
 
-	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/add/{instructorId}")
-	//@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity saveCourse(@PathVariable Long instructorId, @RequestBody Course course) {
-		courseService.saveCourse(instructorId,course);
-		return ResponseEntity.status(201).body("Course added successfully");
-	}
+    //  ***************************************************  POST  ****************************************************
+    @PostMapping("/add/{instructorId}")
+    //@ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity saveCourse(@PathVariable Long instructorId, @RequestBody Course course) {
+        courseService.saveCourse(instructorId, course);
+        return ResponseEntity.status(201).body("Course added successfully");
+    }
 
-	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateCourse(@RequestBody Course updatedCourse, @PathVariable Long id) {
-		courseService.updateCourse(updatedCourse.getStartDate(),updatedCourse.getEndDate(), id);
-		return ResponseEntity.status(201).body("Course updated successfully");
-	}
+    //  ****************************************************  PUT  ****************************************************
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateCourse(@RequestBody Course updatedCourse, @PathVariable Long id) {
+        courseService.updateCourse(updatedCourse.getStartDate(), updatedCourse.getEndDate(), id);
+        return ResponseEntity.status(201).body("Course updated successfully");
+    }
 
-	//  **************************************************  DELETE  ***************************************************
-	@DeleteMapping("/delete/{id}")
-	// @ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity deleteCourse(@PathVariable Long id) {
-		courseService.deleteCourse(id);
-		return ResponseEntity.status(201).body("Course deleted successfully");
-	}
+    //  **************************************************  DELETE  ***************************************************
+    @DeleteMapping("/delete/{id}")
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
+        return ResponseEntity.status(201).body("Course deleted successfully");
+    }
 }

@@ -15,21 +15,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Instructor {
 
-	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
-	private String department;
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
+    private String department;
 
-	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
-	private String languageSpoken;  
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
+    private String languageSpoken;
 
 
-	@OneToMany(mappedBy = "instructor")
-	private List<Course> courseList = new ArrayList<>();
+    @OneToMany(mappedBy = "instructor")
+    private List<Course> courseList = new ArrayList<>();
 
-	@OneToOne
-	@MapsId
-	private AppUser user;
+    @OneToOne
+    @MapsId
+    private AppUser user;
 }

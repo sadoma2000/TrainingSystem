@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InstructorUpdateDTO {
 
-	private String Department;
-	private String Language_spoken;
+    private String Department;
+    private String Language_spoken;
 }

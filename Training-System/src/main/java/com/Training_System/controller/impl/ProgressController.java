@@ -20,49 +20,49 @@ import com.Training_System.service.impl.ProgressService;
 @RequestMapping("/api/progress")
 public class ProgressController {
 
-	@Autowired
-	private ProgressService progressService;
+    @Autowired
+    private ProgressService progressService;
 
-	//  ****************************************************  GET  ****************************************************
-	@GetMapping("/get-all")
-	public ResponseEntity getAllProgress() {
-		return ResponseEntity.status(200).body(progressService.getAllProgress());
-	}
+    //  ****************************************************  GET  ****************************************************
+    @GetMapping("/get-all")
+    public ResponseEntity getAllProgress() {
+        return ResponseEntity.status(200).body(progressService.getAllProgress());
+    }
 
-	@GetMapping("/get-by-Progress/{studentId}")
-	public ResponseEntity getProgressByStudentId(@PathVariable Long studentId) {
-		return ResponseEntity.status(200).body(progressService.getProgressByStudentId(studentId));
-	}
+    @GetMapping("/get-by-Progress/{studentId}")
+    public ResponseEntity getProgressByStudentId(@PathVariable Long studentId) {
+        return ResponseEntity.status(200).body(progressService.getProgressByStudentId(studentId));
+    }
 
-	@GetMapping("/get-by-id/{id}")
+    @GetMapping("/get-by-id/{id}")
     public ResponseEntity getProgressById(@PathVariable Long id) {
-		return ResponseEntity.status(200).body(progressService.getProgressById(id));
-	}
+        return ResponseEntity.status(200).body(progressService.getProgressById(id));
+    }
 
-	//  ***************************************************  POST  ****************************************************
-	
-	@PostMapping("/add")
-        public ResponseEntity addProgress(@RequestBody Progress progress) {
-               String result = progressService.addProgress(progress);
-               return ResponseEntity.status(201).body(result);
-        }
+    //  ***************************************************  POST  ****************************************************
+
+    @PostMapping("/add")
+    public ResponseEntity addProgress(@RequestBody Progress progress) {
+        String result = progressService.addProgress(progress);
+        return ResponseEntity.status(201).body(result);
+    }
 
 
-	//  ****************************************************  PUT  ****************************************************
-	
-      @PutMapping("/update/{id}")
-      public ResponseEntity updateProgress(@PathVariable Long id, @RequestBody Progress progress) {
-              progress.setId(id); 
-              String result = progressService.updateProgress(progress);
-              return ResponseEntity.status(200).body(result);
-       }
+    //  ****************************************************  PUT  ****************************************************
 
-	//  **************************************************  DELETE  ***************************************************
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity deleteProgress(@PathVariable Long id) {
-		progressService.deleteProgress(id);
-		return ResponseEntity.status(201).body("Progress deleted successfully");
-	}
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateProgress(@PathVariable Long id, @RequestBody Progress progress) {
+        progress.setId(id);
+        String result = progressService.updateProgress(progress);
+        return ResponseEntity.status(200).body(result);
+    }
+
+    //  **************************************************  DELETE  ***************************************************
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteProgress(@PathVariable Long id) {
+        progressService.deleteProgress(id);
+        return ResponseEntity.status(201).body("Progress deleted successfully");
+    }
 
 }
 

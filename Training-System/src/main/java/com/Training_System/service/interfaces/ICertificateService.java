@@ -6,15 +6,15 @@ import com.Training_System.model.Certificate;
 
 public interface ICertificateService {
 
-	List<Certificate> getAllCertificates();
+    List<Certificate> getAllCertificates();
 
-	List<Certificate> getCertificatesByStudentId(Long studentId);
+    List<Certificate> getCertificatesByStudentId(Long studentId);
 
-	Certificate getCertificateById(Long id);
+    Certificate getCertificateById(Long id);
 
-	String addCertificate(Certificate certificate, Long studentId);
+    String addCertificate(Certificate certificate, Long studentId);
 
-	String updateCertificate(Certificate certificate, Long id); // Update the method signature here
+    String updateCertificate(Certificate certificate, Long id); // Update the method signature here
 
-	void deleteCertificate(Long id);
+    void deleteCertificate(Long id);
 }

@@ -15,26 +15,26 @@ import java.util.List;
 @AllArgsConstructor
 public class Student {
 
-	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
-	private String major;
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
+    private String major;
 
-	@OneToOne
-	@MapsId
-	private AppUser user;
+    @OneToOne
+    @MapsId
+    private AppUser user;
 
-	@OneToMany(mappedBy = "student")
-	private List<Certificate> certificateList = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Certificate> certificateList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "student")
-	private List<Enrollment> enrollmentList = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Enrollment> enrollmentList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "student")
-	private List<Progress> progressList = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Progress> progressList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "student")
-	private List<Review> reviewList = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Review> reviewList = new ArrayList<>();
 }

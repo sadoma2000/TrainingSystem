@@ -16,38 +16,38 @@ import com.Training_System.model.Student;
 public class StudentController {
 
 
-	private final StudentService studentService;
+    private final StudentService studentService;
 
 
-	//  ****************************************************  GET  ****************************************************
-	@GetMapping("/get-all")
-	public ResponseEntity getAllStudents() {
-		return ResponseEntity.status(200).body(studentService.getAllStudents());
-	}
+    //  ****************************************************  GET  ****************************************************
+    @GetMapping("/get-all")
+    public ResponseEntity getAllStudents() {
+        return ResponseEntity.status(200).body(studentService.getAllStudents());
+    }
 
-	@GetMapping("/get-by-id/{id}")
-	public ResponseEntity getStudentById(@PathVariable Long id) {
-		return ResponseEntity.status(200).body(studentService.getStudentById(id));
-	}
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity getStudentById(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(studentService.getStudentById(id));
+    }
 
-	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/register")
-	public ResponseEntity registerStudent(@RequestBody StudentDTO student) {
-		studentService.registerStudent(student);
-		return ResponseEntity.status(201).body("Student registered successfully");
-	}
+    //  ***************************************************  POST  ****************************************************
+    @PostMapping("/register")
+    public ResponseEntity registerStudent(@RequestBody StudentDTO student) {
+        studentService.registerStudent(student);
+        return ResponseEntity.status(201).body("Student registered successfully");
+    }
 
-	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateStudent(@RequestBody Student student) {
-		studentService.updateStudent(student);
-		return ResponseEntity.status(201).body("Student updated successfully");
-	}
+    //  ****************************************************  PUT  ****************************************************
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateStudent(@RequestBody Student student) {
+        studentService.updateStudent(student);
+        return ResponseEntity.status(201).body("Student updated successfully");
+    }
 
-	//  **************************************************  DELETE  ***************************************************
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity deleteStudent(@PathVariable Long id) {
-		studentService.deleteStudent(id);
-		return ResponseEntity.status(201).body("Student deleted successfully");
-	}
-	}
+    //  **************************************************  DELETE  ***************************************************
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.status(201).body("Student deleted successfully");
+    }
+}

@@ -12,20 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Progress {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "student_id")
-	private Student student;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-	@ManyToOne
-	@JoinColumn(name = "course_id")
-	private Course course;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-	@Column(columnDefinition = "INT NOT NULL")
-	private int completedLessons;
-	@Column(columnDefinition = "INT NOT NULL")
-	private int requiredLessons;
+    @Column(columnDefinition = "INT NOT NULL")
+    private int completedLessons;
+    @Column(columnDefinition = "INT NOT NULL")
+    private int requiredLessons;
 }

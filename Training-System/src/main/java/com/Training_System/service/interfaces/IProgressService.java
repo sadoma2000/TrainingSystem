@@ -6,17 +6,17 @@ import com.Training_System.model.Progress;
 
 public interface IProgressService {
 
-	String addProgress(Progress progress);
+    String addProgress(Progress progress);
 
-	String updateProgress(Progress progress);
+    String updateProgress(Progress progress);
 
-	void deleteProgress(Long id);
+    void deleteProgress(Long id);
 
-	Progress getProgressById(Long id);
+    Progress getProgressById(Long id);
 
-	List<Progress> getAllProgress();
+    List<Progress> getAllProgress();
 
-	List<Progress> getProgressByStudentId(Long studentId);
+    List<Progress> getProgressByStudentId(Long studentId);
 }
 
 

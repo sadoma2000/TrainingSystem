@@ -18,62 +18,62 @@ import org.springframework.http.HttpStatus;
 @Service
 public class CertificateService implements ICertificateService {
 
-	@Autowired
-	private CertificateRepository certificateRepository;
+    @Autowired
+    private CertificateRepository certificateRepository;
 
-	@Autowired
-	private StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-	@Override
-	public List<Certificate> getAllCertificates() {
-		return certificateRepository.findAll();
-	}
+    @Override
+    public List<Certificate> getAllCertificates() {
+        return certificateRepository.findAll();
+    }
 
-	@Override
-	public List<Certificate> getCertificatesByStudentId(Long studentId) {
-		return certificateRepository.findByStudentId(studentId);
-	}
+    @Override
+    public List<Certificate> getCertificatesByStudentId(Long studentId) {
+        return certificateRepository.findByStudentId(studentId);
+    }
 
-	@Override
-	public Certificate getCertificateById(Long id) {
-		return certificateRepository.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found"));
-	}
+    @Override
+    public Certificate getCertificateById(Long id) {
+        return certificateRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found"));
+    }
 
-	@Override
-	public String addCertificate(Certificate certificate, Long studentId) {
-		Optional<Student> studentOptional = studentRepository.findById(studentId);
-		if (studentOptional.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student " + studentId + " not found");
-		}
-		certificate.setStudent(studentOptional.get());
-		certificateRepository.save(certificate);
-		return "Certificate added successfully";
-	}
+    @Override
+    public String addCertificate(Certificate certificate, Long studentId) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if (studentOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student " + studentId + " not found");
+        }
+        certificate.setStudent(studentOptional.get());
+        certificateRepository.save(certificate);
+        return "Certificate added successfully";
+    }
 
-	@Override
-	public String updateCertificate(Certificate certificate, Long id) {
-		Optional<Certificate> existingCertificateOptional = certificateRepository.findById(id);
-		if (existingCertificateOptional.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found");
-		}
+    @Override
+    public String updateCertificate(Certificate certificate, Long id) {
+        Optional<Certificate> existingCertificateOptional = certificateRepository.findById(id);
+        if (existingCertificateOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found");
+        }
 
-		Certificate existingCertificate = existingCertificateOptional.get();
-		existingCertificate.setStudent(certificate.getStudent());
-		existingCertificate.setCourse(certificate.getCourse());
-		existingCertificate.setIssuedDate(certificate.getIssuedDate());
-		existingCertificate.setCertificateTitle(certificate.getCertificateTitle());
+        Certificate existingCertificate = existingCertificateOptional.get();
+        existingCertificate.setStudent(certificate.getStudent());
+        existingCertificate.setCourse(certificate.getCourse());
+        existingCertificate.setIssuedDate(certificate.getIssuedDate());
+        existingCertificate.setCertificateTitle(certificate.getCertificateTitle());
 
-		certificateRepository.save(existingCertificate);
-		return "Certificate updated successfully";
-	}
+        certificateRepository.save(existingCertificate);
+        return "Certificate updated successfully";
+    }
 
-	@Override
-	public void deleteCertificate(Long id) {
-		Optional<Certificate> certificateOptional = certificateRepository.findById(id);
-		if (certificateOptional.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found");
-		}
-		certificateRepository.deleteById(id);
-	}
+    @Override
+    public void deleteCertificate(Long id) {
+        Optional<Certificate> certificateOptional = certificateRepository.findById(id);
+        if (certificateOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Certificate " + id + " not found");
+        }
+        certificateRepository.deleteById(id);
+    }
 }

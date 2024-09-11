@@ -20,46 +20,46 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public class CourseService implements ICourseService {
 
-	@Autowired
-	CourseRepository courseRepository;
+    @Autowired
+    CourseRepository courseRepository;
 
-	private final InstructorRepository instructorRepository;
+    private final InstructorRepository instructorRepository;
 
 
-	@Override
-	public void saveCourse(Long instructorId,Course course) {
-		Course newCourse = new Course();
-		newCourse.setTopic(course.getTopic());
-		newCourse.setStartDate(course.getStartDate());
-		newCourse.setEndDate(course.getEndDate());
-		newCourse.setInstructor(instructorRepository.findInstructorById(instructorId));
-		newCourse.setNumberOfLessons(course.getNumberOfLessons());
-		newCourse.setCourseLevel(course.getCourseLevel());
-		newCourse.setDescription(course.getDescription());
+    @Override
+    public void saveCourse(Long instructorId, Course course) {
+        Course newCourse = new Course();
+        newCourse.setTopic(course.getTopic());
+        newCourse.setStartDate(course.getStartDate());
+        newCourse.setEndDate(course.getEndDate());
+        newCourse.setInstructor(instructorRepository.findInstructorById(instructorId));
+        newCourse.setNumberOfLessons(course.getNumberOfLessons());
+        newCourse.setCourseLevel(course.getCourseLevel());
+        newCourse.setDescription(course.getDescription());
 
-		courseRepository.save(course);
+        courseRepository.save(course);
 
-	}
+    }
 
-	@Override
-	public void updateCourse(Timestamp Start_date, Timestamp End_date, Long id) {
-		Optional<Course> courseOptional = courseRepository.findById(id);
-		if (courseOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course " + id + " not found");
+    @Override
+    public void updateCourse(Timestamp Start_date, Timestamp End_date, Long id) {
+        Optional<Course> courseOptional = courseRepository.findById(id);
+        if (courseOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course " + id + " not found");
 
-		Course c = courseOptional.get();
-		c.setStartDate(Start_date);
-		c.setEndDate(End_date);
-		courseRepository.save(c);
+        Course c = courseOptional.get();
+        c.setStartDate(Start_date);
+        c.setEndDate(End_date);
+        courseRepository.save(c);
 
-	}
+    }
 
-	@Override
-	public void deleteCourse(Long id) {
-		Optional<Course> courseOptional = courseRepository.findById(id);
-		if (courseOptional.isEmpty())
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course " + id + " not found");
-		courseRepository.deleteById(id);
+    @Override
+    public void deleteCourse(Long id) {
+        Optional<Course> courseOptional = courseRepository.findById(id);
+        if (courseOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course " + id + " not found");
+        courseRepository.deleteById(id);
 
-	}
+    }
 }

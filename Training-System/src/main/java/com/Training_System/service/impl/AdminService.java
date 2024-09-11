@@ -16,7 +16,7 @@ public class AdminService {
     private final AuthRepository authRepository;
 
 
-        public void registerAdmin(AppUser user) {
+    public void registerAdmin(AppUser user) {
         String hash = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setRole("ADMIN");
         user.setPassword(hash);

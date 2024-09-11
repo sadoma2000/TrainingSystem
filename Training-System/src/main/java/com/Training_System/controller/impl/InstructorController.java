@@ -25,38 +25,38 @@ import com.Training_System.service.interfaces.IInstructorService;
 @RequiredArgsConstructor
 public class InstructorController {
 
-	@Autowired
-	InstructorRepository instructorRepository;
+    @Autowired
+    InstructorRepository instructorRepository;
 
 
-	private final InstructorService instructorService;
+    private final InstructorService instructorService;
 
     //  ****************************************************  GET  ****************************************************
-	@GetMapping("/get-all")
-	public ResponseEntity getAllInstructors() {
-		return ResponseEntity.status(200).body(instructorRepository.findAll());
-	}
+    @GetMapping("/get-all")
+    public ResponseEntity getAllInstructors() {
+        return ResponseEntity.status(200).body(instructorRepository.findAll());
+    }
 
-	//  ***************************************************  POST  ****************************************************
-	@PostMapping("/register")
-	public ResponseEntity registerInstructor(@RequestBody InstructorDTO instructor) {
-		instructorService.registerInstructor(instructor); // Update the service to handle DTO
-		return ResponseEntity.status(201).body("Instructor added successfully");
-	}
+    //  ***************************************************  POST  ****************************************************
+    @PostMapping("/register")
+    public ResponseEntity registerInstructor(@RequestBody InstructorDTO instructor) {
+        instructorService.registerInstructor(instructor); // Update the service to handle DTO
+        return ResponseEntity.status(201).body("Instructor added successfully");
+    }
 
-	//  ****************************************************  PUT  ****************************************************
-	@PutMapping("/update/{id}")
-	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity updateInstructor(@RequestBody Instructor instructor, @PathVariable Long id) {
-		instructorService.updateInstructor(instructor.getLanguageSpoken(), id);
-		return ResponseEntity.status(201).body("Instructor updated successfully");
-	}
+    //  ****************************************************  PUT  ****************************************************
+    @PutMapping("/update/{id}")
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity updateInstructor(@RequestBody Instructor instructor, @PathVariable Long id) {
+        instructorService.updateInstructor(instructor.getLanguageSpoken(), id);
+        return ResponseEntity.status(201).body("Instructor updated successfully");
+    }
 
-	//  **************************************************  DELETE  ***************************************************
-	@DeleteMapping("/delete/{id}")
-	// @ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity deleteExercise(@PathVariable Long id) {
-		instructorService.deleteInstructor(id);
-		return ResponseEntity.status(201).body("Instructor deleted successfully");
-	}
+    //  **************************************************  DELETE  ***************************************************
+    @DeleteMapping("/delete/{id}")
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity deleteExercise(@PathVariable Long id) {
+        instructorService.deleteInstructor(id);
+        return ResponseEntity.status(201).body("Instructor deleted successfully");
+    }
 }

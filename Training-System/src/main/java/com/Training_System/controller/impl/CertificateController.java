@@ -18,43 +18,43 @@ import com.Training_System.service.impl.CertificateService;
 @RequestMapping("/api/certificates")
 public class CertificateController {
 
-	@Autowired
-	private CertificateService certificateService;
+    @Autowired
+    private CertificateService certificateService;
 
-	// **************************************************** GET ****************************************************
-	@GetMapping("/get-all")
-	public ResponseEntity getAllCertificates() {
-		return ResponseEntity.status(200).body(certificateService.getAllCertificates());
-	}
+    // **************************************************** GET ****************************************************
+    @GetMapping("/get-all")
+    public ResponseEntity getAllCertificates() {
+        return ResponseEntity.status(200).body(certificateService.getAllCertificates());
+    }
 
-	@GetMapping("/get-by-student/{studentId}")
-	public ResponseEntity getCertificatesByStudentId(@PathVariable Long studentId) {
-		return ResponseEntity.status(200).body(certificateService.getCertificatesByStudentId(studentId));
-	}
+    @GetMapping("/get-by-student/{studentId}")
+    public ResponseEntity getCertificatesByStudentId(@PathVariable Long studentId) {
+        return ResponseEntity.status(200).body(certificateService.getCertificatesByStudentId(studentId));
+    }
 
-	@GetMapping("/get-by-id/{id}")
-	public ResponseEntity getCertificateById(@PathVariable Long id) {
-		return ResponseEntity.status(200).body(certificateService.getCertificateById(id));
-	}
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity getCertificateById(@PathVariable Long id) {
+        return ResponseEntity.status(200).body(certificateService.getCertificateById(id));
+    }
 
-	// *************************************************** POST ****************************************************
-	@PostMapping("/add/{studentId}")
-	public ResponseEntity addCertificate(@RequestBody Certificate certificate, @PathVariable Long studentId) {
-		String result = certificateService.addCertificate(certificate, studentId);
-		return ResponseEntity.status(201).body(result);
-	}
+    // *************************************************** POST ****************************************************
+    @PostMapping("/add/{studentId}")
+    public ResponseEntity addCertificate(@RequestBody Certificate certificate, @PathVariable Long studentId) {
+        String result = certificateService.addCertificate(certificate, studentId);
+        return ResponseEntity.status(201).body(result);
+    }
 
-	// **************************************************** PUT ****************************************************
-	@PutMapping("/update/{id}")
-	public ResponseEntity updateCertificate(@RequestBody Certificate certificate, @PathVariable Long id) {
-		String result = certificateService.updateCertificate(certificate, id);
-		return ResponseEntity.status(200).body(result);
-	}
+    // **************************************************** PUT ****************************************************
+    @PutMapping("/update/{id}")
+    public ResponseEntity updateCertificate(@RequestBody Certificate certificate, @PathVariable Long id) {
+        String result = certificateService.updateCertificate(certificate, id);
+        return ResponseEntity.status(200).body(result);
+    }
 
-	// ************************************************** DELETE ***************************************************
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity deleteCertificate(@PathVariable Long id) {
-		certificateService.deleteCertificate(id);
-		return ResponseEntity.status(200).body("Certificate deleted successfully");
-	}
+    // ************************************************** DELETE ***************************************************
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteCertificate(@PathVariable Long id) {
+        certificateService.deleteCertificate(id);
+        return ResponseEntity.status(200).body("Certificate deleted successfully");
+    }
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.Training_System.model.Instructor;
 
 @Repository
-public interface InstructorRepository extends JpaRepository<Instructor, Long>{
+public interface InstructorRepository extends JpaRepository<Instructor, Long> {
     Instructor findInstructorById(long id);
 }

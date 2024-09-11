@@ -9,10 +9,10 @@ import com.Training_System.model.Review;
 
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long>{
-	Review findReviewById(long id);
+public interface ReviewRepository extends JpaRepository<Review, Long> {
+    Review findReviewById(long id);
 
-	List<Review> findByCourseId(Long courseId);
+    List<Review> findByCourseId(Long courseId);
 
-	List<Review> findByStudentId(Long studentId);
+    List<Review> findByStudentId(Long studentId);
 }

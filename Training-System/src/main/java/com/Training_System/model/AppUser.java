@@ -41,18 +41,17 @@ public class AppUser implements UserDetails {
     private String gender;
 
 
-
     @Column(columnDefinition = "VARCHAR(20) NOT NULL")
     private String role;
 
 
     //RELATIONS (ADD TO THE OTHER TWO CLASSES)
-    @OneToOne( mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Student student;
 
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Instructor instructor;

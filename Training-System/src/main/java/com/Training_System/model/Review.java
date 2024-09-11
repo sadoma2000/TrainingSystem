@@ -13,22 +13,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Review {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "student_id")
-	private Student student;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-	@ManyToOne
-	@JoinColumn(name = "course_id")
-	private Course course;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-	@Column(columnDefinition = "VARCHAR(20) NOT NULL")
-	private String reviewText;
+    @Column(columnDefinition = "VARCHAR(20) NOT NULL")
+    private String reviewText;
 
-	@Column(columnDefinition = "DATE NOT NULL")
-	private Timestamp reviewDate;
+    @Column(columnDefinition = "DATE NOT NULL")
+    private Timestamp reviewDate;
 
 }
