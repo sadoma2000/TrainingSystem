@@ -31,10 +31,11 @@ public class ConfigSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and() //Authorization
                 .authenticationProvider(daoAuthenticationProvider())
-                .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests()
                         .requestMatchers("/api/auth/**").permitAll() // Allowed for ALL
                         .requestMatchers(
                                 "/api/certificates",
@@ -64,13 +65,11 @@ public class ConfigSecurity {
                                 "/api/enrollments/get-all")
                         .hasAuthority("ADMIN")
                         //.requestMatchers("/**").hasAuthority("Admin") // Admins can access everything
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/api/v1/auth/logout")
-                        .logoutSuccessUrl("/")
-                        .deleteCookies("JSESSIONID")
-                        .invalidateHttpSession(true)
-                )
+                .and() //logout
+                .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .and()
                 .httpBasic();
         return http.build();
     }
